@@ -6,12 +6,13 @@
 
 @section('content')
 <div class="heading">
-    <label class="item__index">おすすめ</label>
+    <a href="/">おすすめ</a>
+    @foreach ($items as $item)
     <div class="item-card">
-        <a href="">
-        </a>
+        <img src="{{ '/storage/' . $item['image'] }}" alt=" 商品画像" class="item-image">
+        <p>{{ $item->name }}</p>
     </div>
-
-
-    <div class="item__index">マイリスト</div>
-    @endsection
+    @endforeach
+    <a href="/?page=mylist">マイリスト</a>
+</div>
+@endsection

@@ -14,4 +14,9 @@ use App\Http\Controllers\ItemController;
 |
 */
 
+Route::middleware('auth')->group(function () {
 Route::get('/', [ItemController::class, 'index']);
+Route::get('/item/:item_id', [ItemController::class, 'detail']);
+
+});
+

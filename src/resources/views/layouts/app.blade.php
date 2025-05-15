@@ -14,9 +14,8 @@
     <div class="app">
         <header class="header">
             <h1 class="header__heading">CARCHTECH</h1>
-            <form class="search-form"
-                <input class="search-form__keyword-input" type="text" name="keyword" placeholder="商品名で検索" value="{{request('keyword')}}">
-                <input class="search-form__seach-btn" type="submit" value="検索">
+            <form class="search-form">
+                <input class="search-form__keyword-input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{request('keyword')}}">
             </form>
             <ul class="header-nav">
                 <li class="header-nav__item">
@@ -27,7 +26,7 @@
                         <button class="header-nav__button">マイページ</button>
                     </form>
                     <form class="sell__form">
-                        <button class="header-nav__button-sell">マイページ</button>
+                        <button class="header-nav__button-sell">出品</button>
                     </form>
                 </li>
             </ul>

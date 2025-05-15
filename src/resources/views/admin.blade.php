@@ -21,5 +21,8 @@
     </form>
     <div class="item__list">
         <div class="item__index">出品した商品</div>
+        <button class="reset__button"
+            onclick="location.href=''">出品した商品</button>
 
-        <label class="item__index">購入した商品</label>
+        <div class="item__index">購入した商品</div>
+        @endsection
