@@ -10,8 +10,11 @@
     <div class="item-list">
         @foreach ($items as $item)
         <div class="item-card">
-            <img src="{{ '/storage/' . $item['image'] }}" alt=" 商品画像" class="item-image">
-            <p>{{ $item->name }}</p>
+            <a href="/item/:item_id{{ $item['id'] }}">
+                <img src="{{ '/storage/' . $item['image'] }}" alt=" 商品画像" class="item-image">
+            </a>
+            <div class="item-name">{{ $item->name }}</div>
+
         </div>
         @endforeach
     </div>

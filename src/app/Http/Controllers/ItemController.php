@@ -13,9 +13,9 @@ class ItemController extends Controller
         return view('index', compact('items'));
 }
 
-    public function detail(Request $request)
+    public function detail($id)
     {
-        $item = Item::all();
+        $item = Item::find($id);
         return view('detail',compact('item'));
     }
 }
