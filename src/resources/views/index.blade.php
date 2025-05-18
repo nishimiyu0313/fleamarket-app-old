@@ -7,12 +7,17 @@
 @section('content')
 <div class="heading">
     <a href="/">おすすめ</a>
-    @foreach ($items as $item)
-    <div class="item-card">
-        <img src="{{ '/storage/' . $item['image'] }}" alt=" 商品画像" class="item-image">
-        <p>{{ $item->name }}</p>
+    <div class="item-list">
+        @foreach ($items as $item)
+        <div class="item-card">
+            <img src="{{ '/storage/' . $item['image'] }}" alt=" 商品画像" class="item-image">
+            <p>{{ $item->name }}</p>
+        </div>
+        @endforeach
     </div>
-    @endforeach
     <a href="/?page=mylist">マイリスト</a>
+</div>
+<div class="pagination">
+    {{ $items->links('vendor.pagination.semantic-ui') }}
 </div>
 @endsection
