@@ -1,0 +1,48 @@
+.detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    margin-top: 40px;
+}
+.item-card {
+    padding: 15px;
+    text-align: center;
+    margin: 60px;
+}
+.item-image {
+    max-width: 650px;
+    height: auto;
+}
+.item-info {
+    max-width: 600px;
+    margin-left: 60px;
+}
+.item-info h2 {
+    margin-top: 0;
+    font-size: 45px;
+}
+.item-info h3 {
+    margin-top: 30px;;
+    font-size: 30px;
+}
+.item-info h4 {
+    margin-top: 15px;
+    font-size: 20px;
+}
+.item-info p {
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+.purchase_btn {
+    padding: 10px;
+    width: 500px;
+    height: 55px;
+    border: none;
+    border-radius: 5px;
+    background: #f84e4e;
+    color: #fff;
+    cursor: pointer;
+    font-size: 25px;
+    font-weight: 600;
+}

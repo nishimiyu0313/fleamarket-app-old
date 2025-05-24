@@ -10,12 +10,12 @@ class ItemController extends Controller
     public function  index(Request $request)
     {
         $items = Item::Paginate(8);
-        return view('index', compact('items'));
+        return view('item.index', compact('items'));
 }
 
     public function detail($id)
     {
         $item = Item::find($id);
-        return view('detail',compact('item'));
+        return view('item.detail',compact('item'));
     }
 }
