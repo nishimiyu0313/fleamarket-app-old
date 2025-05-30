@@ -6,8 +6,8 @@
 
 @section('content')
 <div class="heading">
-    <a href="/">おすすめ</a>
-    <a href="/?page=mylist">マイリスト</a>
+    <h3>おすすめ</h3>
+    <h3>マイリスト</h3>
     <div class="item-list">
         @foreach ($items as $item)
         <div class="item-card">

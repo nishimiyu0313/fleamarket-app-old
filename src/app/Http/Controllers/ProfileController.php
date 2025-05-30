@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    public function  profile(Request $request)
+    public function  index(Request $request)
     {
-        return view('profile');
+        return view('profile.profile');
     }
 
     public function store(Request $request)
@@ -18,9 +18,11 @@ class ProfileController extends Controller
         Profile::create(
             [
                 'user_id' => Auth::id(),
-                'postal_code' => Auth::id(),
+                'postal_code' =>  $request->postal_code,
                 'address' => $request->address,
                 'building' => $request->building,
             ]);
-        return redirect('/item');
+        $profile['image'] = $request->image->store('img', 'public');
+        return redirect('/item',compact('item'));
+}
 }

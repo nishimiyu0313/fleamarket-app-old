@@ -18,8 +18,10 @@
                 <input class="search-form__keyword-input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{request('keyword')}}">
             </form>
             <ul class="header-nav">
+               
                 <li class="header-nav__item">
-                    <form class="logout__form">
+                    <form class="form" action="/logout" method="post">
+                        @csrf
                         <button class="header-nav__button">ログアウト</button>
                     </form>
                     <form class="mypage__form">
@@ -29,6 +31,8 @@
                         <button class="header-nav__button-sell">出品</button>
                     </form>
                 </li>
+              
+
             </ul>
         </header>
         <div class="content">
@@ -36,6 +40,5 @@
         </div>
     </div>
 </body>
+
 </html>
-
-

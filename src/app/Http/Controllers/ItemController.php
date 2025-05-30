@@ -7,7 +7,7 @@ use App\Models\Item;
 
 class ItemController extends Controller
 {
-    public function  index(Request $request)
+    public function  list(Request $request)
     {
         $items = Item::Paginate(8);
         return view('item.index', compact('items'));
@@ -18,4 +18,16 @@ class ItemController extends Controller
         $item = Item::find($id);
         return view('item.detail',compact('item'));
     }
+    
+    
+    public function search(Request $request)
+    {
+        $query = Item::query();
+        if ($request->keyword) {
+            $query = $query->where('name', 'LIKE', "%{$request->keyword}%");
+        }
+        $items = $query->paginate(8);
+        return view('item.index', compact('items'));
+
+}
 }

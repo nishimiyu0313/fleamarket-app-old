@@ -15,7 +15,7 @@
         <h3>￥{{ $item->price }}（税込）</h3>
 
 
-        <form class="purchase-form" action="">
+        <form class="purchase-form" action="/purchase/{item_id}" method="post">
             @csrf
             <input class="purchase_btn " type="submit" value="購入手続きへ">
         </form>
@@ -29,4 +29,4 @@
 
 
 
-    @endsection
+@endsection

@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PaymentController;
+
 
 
 /*
@@ -16,11 +18,12 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::middleware('auth')->group(function () {
-Route::get('/', [ItemController::class, 'index']);
+Route::get('/', [ItemController::class, 'list']);
 Route::get('/item/{item_id}', [ItemController::class, 'detail']);
-
-Route::get('/profile', [ProfileController::class, 'profile']);
-Route::post('/profile', [ProfileController::class, 'store']);
+Route::middleware('auth')->group(function () {
+    Route::get('/mypage/profile', [ProfileController::class, 'index']);
+    Route::post('/mypage/profile', [ProfileController::class, 'store']);
+    Route::get('/purchase/{item_id}', [PaymentController::class, 'index']);
+    Route::post('/purchase/{item_id}', [PaymentController::class, 'index']);
+    
 });
-
