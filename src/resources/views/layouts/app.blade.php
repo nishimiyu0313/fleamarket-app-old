@@ -18,20 +18,20 @@
                 <input class="search-form__keyword-input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{request('keyword')}}">
             </form>
             <ul class="header-nav">
-               
+
                 <li class="header-nav__item">
                     <form class="form" action="/logout" method="post">
                         @csrf
                         <button class="header-nav__button">ログアウト</button>
                     </form>
-                    <form class="mypage__form">
+                    <form class="mypage__form" action="" method="">
                         <button class="header-nav__button">マイページ</button>
                     </form>
                     <form class="sell__form">
                         <button class="header-nav__button-sell">出品</button>
                     </form>
                 </li>
-              
+
 
             </ul>
         </header>

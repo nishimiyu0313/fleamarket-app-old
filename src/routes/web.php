@@ -25,5 +25,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/mypage/profile', [ProfileController::class, 'store']);
     Route::get('/purchase/{item_id}', [PaymentController::class, 'index']);
     Route::post('/purchase/{item_id}', [PaymentController::class, 'index']);
-    
+    Route::get('/purchase/address/{item_id}', [ProfileController::class, 'address']);
+ 
 });

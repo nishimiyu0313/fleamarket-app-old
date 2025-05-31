@@ -25,4 +25,8 @@ class ProfileController extends Controller
         $profile['image'] = $request->image->store('img', 'public');
         return redirect('/item',compact('item'));
 }
+    public function  address(Request $request)
+    {
+        return view('payment.address');
+    }
 }
