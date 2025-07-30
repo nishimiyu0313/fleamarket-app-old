@@ -14,20 +14,22 @@
     <div class="app">
         <header class="header">
             <h1 class="header__heading">CARCHTECH</h1>
-            <form class="search-form">
+            <form class="search-form" action="/item/search" method="get">
+                @csrf
                 <input class="search-form__keyword-input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{request('keyword')}}">
             </form>
             <ul class="header-nav">
-
                 <li class="header-nav__item">
+                    @if (Auth::check())
                     <form class="form" action="/logout" method="post">
                         @csrf
                         <button class="header-nav__button">ログアウト</button>
                     </form>
-                    <form class="mypage__form" action="" method="">
+                    @endif
+                    <form class="mypage__form" action="/mypage/buy" method="get">
                         <button class="header-nav__button">マイページ</button>
                     </form>
-                    <form class="sell__form">
+                    <form class="sell__form" action="/sell" method="get">
                         <button class="header-nav__button-sell">出品</button>
                     </form>
                 </li>

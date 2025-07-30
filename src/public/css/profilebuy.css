@@ -1,0 +1,10 @@
+.profile-form__btn {
+    background: #fafafa;
+    color: #fb5757;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    border:#fb5757;
+}

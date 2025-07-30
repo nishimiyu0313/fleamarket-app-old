@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>coachtech</title>
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sanitize.css')}}">
 </head>
 <div class="profile-form__content">
     <div class="form-group__content">
@@ -15,7 +16,7 @@
         <form class="form" action="/mypage/profile" method="post" enctype="multipart/form-data">
             @csrf
             <div class="profile__image">
-                <input type="file">
+                <input type="file" name="image">
                 <span class="image">画像を選択する</span>
 
             </div>

@@ -22,7 +22,15 @@
     text-align: left;
 }
 
-.heading h3 {
+.heading {
     margin-left: 40px;;
     font-size: 20px;
+    display: flex;
+    padding: 5px;
+}
+.mylist {
+    margin-left: 20px;
+}
+.recommend{
+    color: rgb(250, 5, 5);
 }

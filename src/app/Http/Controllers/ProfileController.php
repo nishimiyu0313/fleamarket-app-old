@@ -15,15 +15,15 @@ class ProfileController extends Controller
 
     public function store(Request $request)
     {
-        Profile::create(
-            [
-                'user_id' => Auth::id(),
-                'postal_code' =>  $request->postal_code,
-                'address' => $request->address,
-                'building' => $request->building,
-            ]);
+        $profile = $request->only([
+            'postal_code',
+            'address',
+            'building',
+        ]);
         $profile['image'] = $request->image->store('img', 'public');
-        return redirect('/item',compact('item'));
+        $profile['user_id'] = Auth::id();
+        Profile::create($profile);
+        return redirect('/');
 }
     public function  address(Request $request)
     {

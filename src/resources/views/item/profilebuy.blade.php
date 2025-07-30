@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/index.css') }}">
+<link rel="stylesheet" href="{{ asset('css/profilebuy.css') }}">
 @endsection
 
 @section('content')
@@ -20,9 +20,7 @@
         <input class="profile-form__btn" type="submit" value="プロフィールを編集">
     </form>
     <div class="item__list">
-        <div class="item__index">出品した商品</div>
-        <button class="reset__button"
-            onclick="location.href=''">出品した商品</button>
-
-        <div class="item__index">購入した商品</div>
-        @endsection
+        <div class="heading">
+            <h3>購入した商品</h3>
+            <h3>出品した商品</h3>
+            @endsection

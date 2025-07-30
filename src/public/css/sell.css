@@ -1,0 +1,49 @@
+.sell-form__content {
+    margin: 0 auto;
+    padding: 20px 15px;
+    max-width: 1230px;
+}
+.sell-form__heading {
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 25px;
+}
+.form {
+    margin: 0 auto;
+    width: 55%;
+    text-align: center;
+}
+.form__group {
+    margin: 40px;
+}
+
+.form__group-title {
+    text-align: left;
+}
+.form__label--item {
+    font-size: 25px;
+ font-weight: 500;
+}
+.sell-form__input {
+    padding: 10px;
+    width: 110%;
+    height: 50px;
+    border: 1px solid #0e0000;
+    border-radius: 3px;
+  
+    appearance: none;
+}
+.sell-form__btn {
+    padding: 10px;
+    width: 500px;
+    height: 55px;
+    border: none;
+    border-radius: 5px;
+    background: #f84e4e;
+    color: #fff;
+    cursor: pointer;
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 60px;
+}
+  

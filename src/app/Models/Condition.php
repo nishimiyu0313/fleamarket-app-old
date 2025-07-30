@@ -12,4 +12,8 @@ class Condition extends Model
      protected $fillable = [
         'content'
     ];
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 }

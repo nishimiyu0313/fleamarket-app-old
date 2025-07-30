@@ -19,13 +19,21 @@ class Item extends Model
         'image'
     ];
 
-    public function categories()
+    public function category()
     {
         return $this->belongsToMany(Category::class, 'category_item');
     }
 
-    public function conditions()
+    public function condition()
     {
         return $this->belongsTo(Condition::class);
     }
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class);
+    }
+
 }
