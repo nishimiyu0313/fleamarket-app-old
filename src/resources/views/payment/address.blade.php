@@ -10,7 +10,8 @@
         <div class="address-form__heading">
             <h2>住所の変更</h2>
         </div>
-        <form class="form" action="/purchase/address/{item_id}" method="post">
+        <form class="form" action="/purchase/address/{{ $item['id'] }}" method=" post">
+            @csrf
             <div class="form__group">
                 <div class="form__group-title">
                     <span class="form__label--item">郵便番号</span>

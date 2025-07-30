@@ -13,8 +13,6 @@ class PaymentController extends Controller
     public function  index($id)
     {
         $item = Item::find($id);
-
-    
         $user = Auth::user();
         return view('payment.purchase',compact('item', 'user'));
     }

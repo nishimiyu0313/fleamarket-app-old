@@ -14,24 +14,24 @@
         <p>{{ $item->brand_name }}</p>
         <h3>￥{{ $item->price }}（税込）</h3>
 
+        
+            <form class="purchase-form" action="/purchase/{{ $item['id'] }}" method="post">
+                @csrf
+                <input class="purchase_btn " type="submit" value="購入手続きへ">
+            </form>
+            <h3>商品説明</h3>
+            <p>{{ $item->description }}</p>
+            <h3>商品の情報</h3>
+            <h4>カテゴリー</h4>
+            <h4>商品の状態</h4>
 
-        <form class="purchase-form" action="/purchase/{item_id}" method="post">
-            @csrf
-            <input class="purchase_btn " type="submit" value="購入手続きへ">
-        </form>
-        <h3>商品説明</h3>
-        <p>{{ $item->description }}</p>
-        <h3>商品の情報</h3>
-        <h4>カテゴリー</h4>
-        <h4>商品の状態</h4>
 
-
-        <form method="post" action="{{ url('/items/' . $item->id . 'comments') }}">
-            @csrf
-            <label>商品へのコメント</label><br>
-            <textarea name="content" rows="3" cols="50" required> {{ old('content') }}</textarea>
-            <input class="purchase_btn" type="submit" value="コメントを送信する">
-        </form>
+            <form method="post" action="{{ url('/items/' . $item->id . 'comments') }}">
+                @csrf
+                <label>商品へのコメント</label><br>
+                <textarea name="content" rows="3" cols="50" required> {{ old('content') }}</textarea>
+                <input class="purchase_btn" type="submit" value="コメントを送信する">
+            </form>
 
     </div>
 </div>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Profile;
+use App\Models\Payment;
+use App\Models\Item;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
@@ -25,8 +27,23 @@ class ProfileController extends Controller
         Profile::create($profile);
         return redirect('/');
 }
-    public function  address(Request $request)
+    public function  address($id)
     {
-        return view('payment.address');
+        $item = Item::find($id);
+        $user = Auth::user();
+        return view('payment.address', compact('item', 'user'));
+    }
+    public function  updateAddress(Request $request)
+    {
+        
+        Payment::create([
+
+            'postal_code' => $request->postal_code,
+            'address' => $request->address,
+            'building' => $request->building,
+            'user_id' => Auth::id()
+
+        ]);
+        return view('payment.purchase');
     }
 }

@@ -28,6 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/purchase/{item_id}', [PaymentController::class, 'index']);
     Route::post('/purchase/{item_id}', [PaymentController::class, 'index']);
     Route::get('/purchase/address/{item_id}', [ProfileController::class, 'address']);
+    Route::post('/purchase/address/{item_id}', [ProfileController::class, 'updateAddress']);
+
     Route::get('/mypage/buy', [ItemController::class, 'profileBuy']);
     Route::get('/sell', [ItemController::class, 'index']);
     Route::post('/sell', [ItemController::class, 'sell']);
