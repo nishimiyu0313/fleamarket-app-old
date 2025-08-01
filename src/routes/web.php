@@ -22,7 +22,9 @@ Route::get('/', [ItemController::class, 'list']);
 Route::get('/item/{item_id}', [ItemController::class, 'detail']);
 
 Route::middleware('auth')->group(function () {
+    Route::get('/mylist', [ItemController::class, 'mylist']);
     Route::post('/item/{item_id}\comments', [ItemController::class, 'storeComment']);
+
     Route::get('/mypage/profile', [ProfileController::class, 'index']);
     Route::post('/mypage/profile', [ProfileController::class, 'store']);
     Route::get('/purchase/{item_id}', [PaymentController::class, 'index']);

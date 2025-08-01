@@ -16,6 +16,12 @@ class ItemController extends Controller
         $items = Item::Paginate(8);
         return view('item.index', compact('items'));
 }
+    public function  mylist(Request $request)
+    {
+        $items = Item::Paginate(8);
+        return view('item.mylist', compact('items'));
+    }
+
 
     public function detail($id)
     {

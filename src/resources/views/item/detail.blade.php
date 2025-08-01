@@ -18,12 +18,12 @@
         <form method="POST" action="/item/{{ $item['id'] }}/unlike ">
             @csrf
             @method('DELETE')
-            <button type="submit">★</button>
+            <button type="submit" class="unlike-submit">★</button>
         </form>
         @else
         <form method="POST" action="/item/{{ $item['id'] }}/like ">
             @csrf
-            <button type="submit">☆</button>
+            <button type="submit" class="like-submit">☆</button>
         @endif
 
 
