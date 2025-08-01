@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/profilebuy.css') }}">
+<link rel="stylesheet" href="{{ asset('css/profilesell.css') }}">
 @endsection
 
 @section('content')
@@ -16,38 +16,30 @@
 
         </div>
     </div>
-    
     <form class="profile-form">
         <input class="profile-form__btn" type="submit" value="プロフィールを編集">
     </form>
     <div class="heading_name">
-        <a class="listeditem" href="/mypage/sell">
+        <div class="listeditem">
             <h3>出品した商品</h3>
-        </a>
-        <div class="boughtitem">
-            <h3>購入した商品</h3>
         </div>
+        <a class="boughtitem" href="/mypage/buy">
+            <h3>購入した商品</h3>
+        </a>
     </div>
     <div class="item-list">
-
-      @if(isset($boughtItems) && count($boughtItems) > 0)
-        @foreach ($boughtItems as $item)
+        @foreach ($listedItems as $item)
         <div class="item-card">
             <a href="/item/{{ $item['id'] }}">
                 <img src="{{ '/storage/' . $item['image'] }}" alt=" 商品画像" class="item-image">
             </a>
             <div class="item-name">{{ $item->name }}</div>
+
         </div>
         @endforeach
     </div>
 
     <div class="pagination">
-        {{ $boughtItems->links('vendor.pagination.semantic-ui') }}
+        {{ $listedItems->links('vendor.pagination.semantic-ui') }}
     </div>
-   
-</div>
-
-    @else
-    <p>購入済み商品はありません。</p>
-    @endif
     @endsection

@@ -36,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/purchase/address/{item_id}', [ProfileController::class, 'updateAddress']);
 
     Route::get('/mypage/buy', [ItemController::class, 'profileBuy']);
+    Route::get('/mypage/sell', [ItemController::class, 'profileSell']);
+
     Route::get('/sell', [ItemController::class, 'index']);
     Route::post('/sell', [ItemController::class, 'sell']);
     Route::get('/item/search', [ItemController::class, 'search']);

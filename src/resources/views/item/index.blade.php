@@ -14,6 +14,7 @@
     </a>
 </div>
 <div class="item-list">
+
     @foreach ($items as $item)
     <div class="item-card">
         <a href="/item/{{ $item['id'] }}">
@@ -23,6 +24,7 @@
 
     </div>
     @endforeach
+
 </div>
 
 <div class="pagination">

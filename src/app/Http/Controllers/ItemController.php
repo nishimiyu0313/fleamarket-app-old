@@ -65,24 +65,29 @@ class ItemController extends Controller
     public function search(Request $request)
     {
         $query = Item::query();
-        if ($request->filled('keyword')) {
-            $keyword = $request->input('keyword');
-            $query->where('name', 'LIKE', "%{keyword}%");
+        if ($request->keyword) {
+            $query->where('name', 'LIKE', "%{$request->keyword}%");
         }
 
-        switch ($request->input('sort')) {
-            case '1':
-                $query->orderBy('price', 'desc');
-            case '2':
-                $query->orderBy('price', 'asc');
-                break;
-            }
+        // dd($query);
         $items = $query->paginate(8);
+
         return view('item.index', compact('items'));
 }
     public function  profileBuy(Request $request)
     {
-        return view('item.profilebuy');
+       
+        $user = Auth::user();
+        $boughtItems = Item::where('buyer_id', $user->id)->latest()->paginate(8);
+     
+        return view('item.profilebuy', compact('user', 'boughtItems'));
+    }
+
+    public function  profileSell(Request $request)
+    {
+        $user = Auth::user();
+       $listedItems  = Item::where('user_id', $user->id)->latest()->paginate(8);
+        return view('item.profilesell', compact('user', 'listedItems'));
     }
 
     public function  index() 
