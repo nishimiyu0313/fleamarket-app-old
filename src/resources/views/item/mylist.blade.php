@@ -8,11 +8,11 @@
 <div class="heading">
     <a class="recommend" href="/">
         <h3>おすすめ</h3>
-</a>
-        
-        <div class="mylist">
-            <h3>マイリスト</h3>
-        </div>
+    </a>
+
+    <div class="mylist">
+        <h3>マイリスト</h3>
+    </div>
 </div>
 <div class="item-list">
     @foreach ($favoriteItems as $item)

@@ -19,14 +19,16 @@
     <form class="profile-form">
         <input class="profile-form__btn" type="submit" value="プロフィールを編集">
     </form>
-    <div class="heading_name">
-        <div class="listeditem">
-            <h3>出品した商品</h3>
-        </div>
-        <a class="boughtitem" href="/mypage/buy">
-            <h3>購入した商品</h3>
-        </a>
+</div>
+<div class="heading_name">
+    <div class="listeditem">
+        <h3>出品した商品</h3>
     </div>
+    <a class="boughtitem" href="/mypage/buy">
+        <h3>購入した商品</h3>
+    </a>
+</div>
+<div>
     <div class="item-list">
         @foreach ($listedItems as $item)
         <div class="item-card">
@@ -39,7 +41,11 @@
         @endforeach
     </div>
 
+
     <div class="pagination">
         {{ $listedItems->links('vendor.pagination.semantic-ui') }}
     </div>
+
+
+
     @endsection
