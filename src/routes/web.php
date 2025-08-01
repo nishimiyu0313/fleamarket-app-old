@@ -27,6 +27,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/mypage/profile', [ProfileController::class, 'store']);
     Route::get('/purchase/{item_id}', [PaymentController::class, 'index']);
     Route::post('/purchase/{item_id}', [PaymentController::class, 'index']);
+    Route::post('/item/{item_id}/like', [ItemController::class, 'like']);
+    Route::delete('/item/{item_id}/unlike', [ItemController::class, 'unlike']);
+
     Route::get('/purchase/address/{item_id}', [ProfileController::class, 'address']);
     Route::post('/purchase/address/{item_id}', [ProfileController::class, 'updateAddress']);
 

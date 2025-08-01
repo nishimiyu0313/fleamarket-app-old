@@ -14,7 +14,20 @@
         <p>{{ $item->brand_name }}</p>
         <h3>￥{{ $item->price }}（税込）</h3>
 
-        
+        @if (Auth::check() && $item->likedUsers->contains(Auth::user()))
+        <form method="POST" action="/item/{{ $item['id'] }}/unlike ">
+            @csrf
+            @method('DELETE')
+            <button type="submit">★</button>
+        </form>
+        @else
+        <form method="POST" action="/item/{{ $item['id'] }}/like ">
+            @csrf
+            <button type="submit">☆</button>
+        @endif
+
+
+
             <form class="purchase-form" action="/purchase/{{ $item['id'] }}" method="post">
                 @csrf
                 <input class="purchase_btn " type="submit" value="購入手続きへ">

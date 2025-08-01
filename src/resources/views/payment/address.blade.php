@@ -19,6 +19,7 @@
                 <div class="form__group-content">
                     <div class="form__input--text">
                         <input type="text" name="postal_code" value="{{ old('postal_code') }}" />
+                        <input type="hidden" name="id" value="{{ $profile['id'] }}">
                     </div>
                     <div class="form__error">
 
@@ -32,6 +33,7 @@
                 <div class="form__group-content">
                     <div class="form__input--text">
                         <input type="text" name="address" value="{{ old('address') }}" />
+                        <input type="hidden" name="id" value="{{ $profile['id'] }}">
                     </div>
                     <div class="form__error">
 
@@ -45,6 +47,8 @@
                 <div class="form__group-content">
                     <div class="form__input--text">
                         <input type="text" name="building" value="{{ old('building') }}" />
+                        <input type="hidden" name="id" value="{{ $profile['id'] }}">
+
                     </div>
                     <div class="form__error">
 

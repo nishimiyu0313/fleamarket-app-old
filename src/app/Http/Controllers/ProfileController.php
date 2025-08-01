@@ -26,24 +26,25 @@ class ProfileController extends Controller
         $profile['user_id'] = Auth::id();
         Profile::create($profile);
         return redirect('/');
-}
+    }
     public function  address($id)
     {
         $item = Item::find($id);
+        $profile = Profile::find($id);
         $user = Auth::user();
-        return view('payment.address', compact('item', 'user'));
+        return view('payment.address', compact('item', 'user', 'profile'));
     }
     public function  updateAddress(Request $request)
     {
-        
-        Payment::create([
 
-            'postal_code' => $request->postal_code,
-            'address' => $request->address,
-            'building' => $request->building,
-            'user_id' => Auth::id()
-
+        $address = $request->only([
+            'postal_code',
+            'address',
+            'building',
         ]);
-        return view('payment.purchase');
+        
+        $user = Auth::user();
+        Payment::create($address);
+        return redirect('payment.purchase', compact('address', 'user'));
     }
 }

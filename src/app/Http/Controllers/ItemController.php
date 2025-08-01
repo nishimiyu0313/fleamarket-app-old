@@ -31,20 +31,41 @@ class ItemController extends Controller
         ]);
         return redirect('/item/{item_id}');
     }
+    public function like($id)
+    {
+        $item = Item::find($id);
+        $user = Auth::user();
+
+        $item->likedUsers()->attach($user->id);
+
+        return view('item.detail', compact('item', 'user'));
+    }
+    public function unlike($id)
+    {
+        $item = Item::find($id);
+        $user = Auth::user();
+
+        $item->likedUsers()->detach($user->id);
+
+        return view('item.detail', compact('item', 'user'));
+    }
+    
 
     
     public function search(Request $request)
     {
         $query = Item::query();
-        if ($request->keyword) {
-            $query = $query->where('name', 'LIKE', "%{$request->keyword}%");
+        if ($request->filled('keyword')) {
+            $keyword = $request->input('keyword');
+            $query->where('name', 'LIKE', "%{keyword}%");
         }
 
-        switch ($request->sort) {
+        switch ($request->input('sort')) {
             case '1':
-                $query->orderBy('price', 'desc')->get();
+                $query->orderBy('price', 'desc');
             case '2':
-                $query->orderBy('price', 'asc')->get();
+                $query->orderBy('price', 'asc');
+                break;
             }
         $items = $query->paginate(8);
         return view('item.index', compact('items'));

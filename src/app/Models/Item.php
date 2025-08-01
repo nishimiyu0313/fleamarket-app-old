@@ -35,5 +35,9 @@ class Item extends Model
     {
         return $this->belongsTo(Payment::class);
     }
+    public function likedUsers()
+    {
+        return $this->belongsToMany(User::class, 'likes')->withTimestamps();
+    }
 
 }
