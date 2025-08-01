@@ -18,8 +18,12 @@ class ItemController extends Controller
 }
     public function  mylist(Request $request)
     {
-        $items = Item::Paginate(8);
-        return view('item.mylist', compact('items'));
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        $favoriteItems = $user->likedItems()->latest()->paginate(8);
+
+        return view('item.mylist', compact('favoriteItems', 'user'));
     }
 
 

@@ -9,9 +9,9 @@
     <div class="recommend">
         <h3>おすすめ</h3>
     </div>
-    <div class="mylist">
+    <a class="mylist" href="/mylist">
         <h3>マイリスト</h3>
-    </div>
+    </a>
 </div>
 <div class="item-list">
     @foreach ($items as $item)

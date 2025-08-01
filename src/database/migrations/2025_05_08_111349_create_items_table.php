@@ -17,6 +17,8 @@ class CreateItemsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('condition_id')->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('buyer_id')->nullable();
+            $table->foreign('buyer_id')->references('id')->on('users')->onDelete('set null');
             $table->string('name');
             $table->string('brand_name');
             $table->text('description');

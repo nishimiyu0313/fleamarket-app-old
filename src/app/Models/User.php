@@ -41,9 +41,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function likeitems() 
+
+    public function likedItems() 
     {
         return $this->belongsToMany(Item::class, 'likes')->withTimestamps();
+    }
+
+    public function items()
+    {
+        return $this->hasMary(Item::class, 'user_id');
+    }
+
+    public function boughtItems()
+    {
+        return $this->belongsToMany(Item::class, 'buyer_id');
     }
         
     }

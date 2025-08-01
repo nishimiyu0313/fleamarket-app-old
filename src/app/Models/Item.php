@@ -28,7 +28,8 @@ class Item extends Model
     {
         return $this->belongsTo(Condition::class);
     }
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
     public function payment()
@@ -39,5 +40,12 @@ class Item extends Model
     {
         return $this->belongsToMany(User::class, 'likes')->withTimestamps();
     }
-
+    public function seller()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    public function buyer()
+    {
+        return $this->belongsTo(User::class, 'buyer_id');
+    }
 }
