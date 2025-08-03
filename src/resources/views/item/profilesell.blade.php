@@ -16,7 +16,7 @@
 
         </div>
     </div>
-    <form class="profile-form">
+    <form class="profile-form" action="/mypage/profile/{{ auth()->user()->id }}" method="get">
         <input class="profile-form__btn" type="submit" value="プロフィールを編集">
     </form>
 </div>
@@ -33,19 +33,20 @@
         @foreach ($listedItems as $item)
         <div class="item-card">
             <a href="/item/{{ $item['id'] }}">
-                <img src="{{ '/storage/' . $item['image'] }}" alt=" 商品画像" class="item-image">
-            </a>
-            <div class="item-name">{{ $item->name }}</div>
+        <img src="{{ '/storage/' . $item['image'] }}" alt=" 商品画像" class="item-image">
+        </a>
+        <div class="item-name">{{ $item->name }}</div>
 
-        </div>
-        @endforeach
-    </div>
-
-
-    <div class="pagination">
-        {{ $listedItems->links('vendor.pagination.semantic-ui') }}
-    </div>
+</div>
+@endforeach
+</div>
 
 
+<div class="pagination">
+    {{ $listedItems->links('vendor.pagination.semantic-ui') }}
+</div>
+</div>
 
-    @endsection
+
+
+@endsection

@@ -12,21 +12,52 @@ class ProfileController extends Controller
 {
     public function  index(Request $request)
     {
-        return view('profile.profile');
+        $user = Auth::user();
+        return view('profile.profile', compact('user'));
     }
 
     public function store(Request $request)
     {
+        $user = auth()->user();
         $profile = $request->only([
             'postal_code',
             'address',
             'building',
         ]);
-        $profile['image'] = $request->image->store('img', 'public');
-        $profile['user_id'] = Auth::id();
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('images', 'public');
+            $profile['image'] = $path;
+        }
+        $profile['user_id'] = $user->id;
         Profile::create($profile);
         return redirect('/');
     }
+
+    public function  profile(Request $request)
+    {
+        $user = Auth::user();
+        return view('profile.edit', compact('user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = auth()->user();
+        $profile = $request->only([
+            'postal_code',
+            'address',
+            'building',
+        ]);
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('images', 'public');
+            $profile['image'] = $path;
+        }
+        $user->profile->update($profile);
+        return redirect('/');
+    }
+
+
+
+
     public function  address($id)
     {
         $item = Item::find($id);

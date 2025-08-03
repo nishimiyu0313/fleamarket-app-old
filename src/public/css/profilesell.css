@@ -18,29 +18,28 @@
     justify-content: center;
     margin-top: 20px;
 }
-.item-name{
+.item-name {
     text-align: left;
 }
 
 .heading {
-    margin-left: 40px;;
+    margin-left: 40px;
     font-size: 20px;
     display: flex;
     padding: 5px;
 }
 .heading_name {
-    margin-left: 40px;;
+    margin-left: 40px;
     font-size: 20px;
     display: flex;
     padding: 5px;
 }
-.boughtitem{
-   
-    margin-left: 5px;
+.boughtitem {
+    margin-left: 30px;
 }
-.listeditem{
+.listeditem {
     color: rgb(250, 5, 5);
 }
 .profile-form {
-     margin-left: 90%;
+    margin-left: 90%;
 }

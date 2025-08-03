@@ -64,15 +64,16 @@ class ItemController extends Controller
     
     public function search(Request $request)
     {
+        $keyword = $request->input('keyword');
         $query = Item::query();
-        if ($request->keyword) {
-            $query->where('name', 'LIKE', "%{$request->keyword}%");
+        if (!empty($keyword)) {
+            $query->where('name', 'LIKE', '%' . $keyword . '%');
         }
 
         // dd($query);
         $items = $query->paginate(8);
 
-        return view('item.index', compact('items'));
+        return view('item.index', compact('items', 'keyword'));
 }
     public function  profileBuy(Request $request)
     {

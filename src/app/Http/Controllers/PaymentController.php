@@ -16,7 +16,20 @@ class PaymentController extends Controller
         $user = Auth::user();
         return view('payment.purchase',compact('item', 'user'));
     }
-    
+    public  function payment(Request $request)
+    {
+        $item = Item::find($request->product_id);
+
+        Payment::create([
+            'user_id' => Auth::id(),
+            'item_id' => $item->id,
+
+        ]);
+
+
+
+
+    }
 
     
         

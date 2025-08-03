@@ -23,7 +23,7 @@
 }
 .item-info h3 {
     margin-top: 30px;;
-    font-size: 30px;
+    font-size: 50px;
 }
 .item-info h4 {
     margin-top: 15px;
@@ -48,13 +48,26 @@
 }
 
 .like-submit {
-    font-size: 32px;
-    margin-top: 15px;
+    font-size: 40px;
+    
+    margin-bottom: 50px;
     padding: 10px;
     width: 180px;
-    height: 40px;
-    border: 1px solid #8a8686;
-    border-radius: 3px;
+    height: 50px;
+    border:none;
+    border-radius: 15px;
+    background-color: transparent;
     
 
+}
+.unlike-submit {
+    font-size: 40px;
+   
+     margin-bottom: 50px;
+    padding: 10px;
+    width: 180px;
+    height: 50px;
+    border:none;
+    border-radius: 15px;
+    background-color: transparent;
 }
