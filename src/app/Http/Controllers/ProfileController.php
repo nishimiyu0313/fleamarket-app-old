@@ -61,20 +61,18 @@ class ProfileController extends Controller
     public function  address($id)
     {
         $item = Item::find($id);
-        $profile = Profile::find($id);
         $user = Auth::user();
-        return view('payment.address', compact('item', 'user', 'profile'));
+        return view('payment.address', compact('user', 'item'));
     }
     public function  updateAddress(Request $request)
     {
-
+        $user = Auth::user();
         $address = $request->only([
             'postal_code',
             'address',
             'building',
         ]);
-        
-        $user = Auth::user();
+
         Payment::create($address);
         return redirect('payment.purchase', compact('address', 'user'));
     }
