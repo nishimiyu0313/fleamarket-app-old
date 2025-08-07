@@ -17,9 +17,10 @@
             @csrf
             <div class="profile__image">
                 <img src=" {{ isset($profile['image']) ? asset('storage/' . $profile['image']) : asset('default.png') }}" alt="アイコン画像"
-                    class="profile-image">
-                <label class="image" for="image">画像を選択する</label>
-                <input type="file" name="image" id="image">
+                    class="profile-icon">
+                <label for="image" class="file-button">画像を選択する</label>
+                <input type="file" id="image" name="image" class="file-input">
+
 
             </div>
             <div class="form__group">
@@ -28,7 +29,7 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--text">
-                        <input type="text" name="name" value="{{ old('name') }}" />
+                        <input type="text" name="name" value="" />
                     </div>
                     <div class="form__error">
 
@@ -41,7 +42,7 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--text">
-                        <input type="text" name="postal_code" value="{{ old('postal_code', $user->profile->postal_code ?? '') }}" />
+                        <input type="text" name="postal_code" value="" />
                     </div>
                     <div class="form__error">
 
@@ -54,7 +55,7 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--text">
-                        <input type="text" name="address" value="{{ old('address', $user->profile->address ?? '') }}" />
+                        <input type="text" name="address" value="" />
                     </div>
                     <div class="form__error">
 
@@ -67,7 +68,7 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--text">
-                        <input type="text" name="building" value="{{ old('building', $user->profile->building ?? '') }}" />
+                        <input type="text" name="building" value="" />
                     </div>
                     <div class="form__error">
 

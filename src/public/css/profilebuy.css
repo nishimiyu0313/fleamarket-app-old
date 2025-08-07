@@ -1,46 +1,32 @@
-.item-card {
-    padding: 15px;
-    text-align: center;
-    margin: 10px;
+.content {
+    margin: 20px;
 }
-.item-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-.item-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-.pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-.item-name {
-    text-align: left;
-}
-
-.heading {
-    margin-left: 40px;
+.toppage-list {
     font-size: 20px;
     display: flex;
-    padding: 5px;
-}
-.heading_name {
-    margin-left: 40px;
-    font-size: 20px;
-    display: flex;
-    padding: 5px;
+    height: 47px;
+    width: 1512px;
+    top: 127px;
+} 
+.listeditem {
+    margin-left: 30px;
+    color: black;
+    text-decoration: none;
 }
 .boughtitem {
     color: rgb(250, 5, 5);
-    margin-left: 30px;
+    margin-left: 80px;
 }
-.listeditem {
-    margin-left: 5px;
-}
-.profile-form {
-    margin-left: 90%;
+.profile-form__btn {
+ width: 200px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    color: #f84e4e;
+    background-color: #fff;
+    border: 1px solid #f84e4e ;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    margin-left: 1200px;
 }

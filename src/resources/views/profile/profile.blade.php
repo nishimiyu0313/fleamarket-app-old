@@ -17,9 +17,11 @@
             @csrf
             <div class="profile__image">
                 <img src=" {{ isset($profile['image']) ? asset('storage/' . $profile['image']) : asset('default.png') }}" alt="アイコン画像"
-                    class="profile-image">
-                <label class="image" for="image">画像を選択する</label>
-                <input type="file" name="image" id="image">
+                    class="profile-icon">
+
+                <label for="image" class="file-button">画像を選択する</label>
+                <input type="file" id="image" name="image" class="file-input">
+
 
             </div>
             <div class="form__group">

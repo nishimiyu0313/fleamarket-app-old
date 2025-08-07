@@ -25,14 +25,7 @@ class PaymentController extends Controller
             'item_id' => $item->id,
 
         ]);
-
-
-
-
-    }
-
-    
-        
+    }       
     }
     
 

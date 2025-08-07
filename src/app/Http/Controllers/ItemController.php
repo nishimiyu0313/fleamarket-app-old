@@ -6,122 +6,94 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Comment;
 use App\Models\Condition;
+use App\Models\Category;
+
 use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
-
 {
-    public function  list(Request $request)
+    public function list()
     {
         $items = Item::Paginate(8);
         return view('item.index', compact('items'));
-}
-    public function  mylist(Request $request)
+    }
+    public function mylist()
     {
         /** @var \App\Models\User $user */
         $user = Auth::user();
-
         $favoriteItems = $user->likedItems()->latest()->paginate(8);
+
 
         return view('item.mylist', compact('favoriteItems', 'user'));
     }
-
-
     public function detail($id)
     {
-        $item = Item::find($id);
-        return view('item.detail',compact('item'));
+        $item = Item::with(['condition'])->withCount('comments')->findOrFail($id);
+        return view('item.detail', compact('item'));
     }
-    public function  storeComment(Request $request, $itemId)
+    public function like(Item $item)
     {
-        Comment::create([
-            'user_id' => Auth::id(),
-            'item_id' => $itemId,
-            'content' => $request->input('content')
-        ]);
-        return redirect('/item/{item_id}');
-    }
-    public function like($id)
-    {
-        $item = Item::find($id);
         $user = Auth::user();
-
         $item->likedUsers()->attach($user->id);
 
-        return view('item.detail', compact('item', 'user'));
+        return redirect()->back(); 
     }
-    public function unlike($id)
-    {
-        $item = Item::find($id);
-        $user = Auth::user();
 
+    public function unlike(Item $item)
+    {
+        $user = Auth::user();
         $item->likedUsers()->detach($user->id);
 
-        return view('item.detail', compact('item', 'user'));
+        return redirect()->back();
     }
-    
 
-    
-    public function search(Request $request)
+    public function commentStore(Request $request, Item $item)
     {
-        $keyword = $request->input('keyword');
-        $query = Item::query();
-        if (!empty($keyword)) {
-            $query->where('name', 'LIKE', '%' . $keyword . '%');
-        }
+        $comment = new Comment();
+        $comment->content = $request->content;
+        $comment->user_id = Auth::id();
+        $comment->item_id = $item->id;
+        $comment->save();
 
-        // dd($query);
-        $items = $query->paginate(8);
-
-        return view('item.index', compact('items', 'keyword'));
-}
-    public function  profileBuy(Request $request)
-    {
-       
-        $user = Auth::user();
-        $boughtItems = Item::where('buyer_id', $user->id)->latest()->paginate(8);
-     
-        return view('item.profilebuy', compact('user', 'boughtItems'));
+        return back()->with('success', 'コメントを投稿しました');
     }
+    public function index()
+    {
+        $categories = Category::all();
+        $conditions = Condition::all();
+        return view('item.sell', compact('conditions', 'categories'));
+
+        return view('item.sell');
+    }
+    public function sell(Request $request)
+    {
+        $imagePath = $request->image->store('images', 'public');
+        $conditions = Condition::all();      
+
+
+
+        $item = Item::create([
+            'name' => $request->name,
+           
+            'condition_id' => $request->condition_id,
+            'brand_name' => $request->brand_name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'image' => $imagePath,
+            'user_id' => Auth::id()
+        ]);
+        return view('item.sell', compact('imagePath', 'item', 'conditions'));
+    }
+
 
     public function  profileSell(Request $request)
     {
         $user = Auth::user();
-       $listedItems  = Item::where('user_id', $user->id)->latest()->paginate(8);
+        $listedItems  = Item::where('user_id', $user->id)->latest()->paginate(8);
         return view('item.profilesell', compact('user', 'listedItems'));
     }
-
-    public function  index() 
+    public function  profileBuy(Request $request)
     {
-        $conditions = Condition::all();
-        return view('item.sell', compact('conditions'));
+        return view('item.profilesbuy',);
     }
-
-    public function  sell(Request $request)
-    {
-       
-    
-        $imagePath = $request->image->store('images', 'public');
-        $condition = Condition::find($request->condition_id);
-    
-
-
-        Item::create([
-            
-                'name' => $request->name,
-                'condition_id' => $request->condition_id,
-                'brand_name' => $request->brand_name,
-                'description' => $request->description,
-                'price' => $request->price,
-                'image' => $imagePath,
-                'user_id' => Auth::id()
-               
-            ]);
-
-
-        return view('item.profilebuy', compact('condition', 'imagePath'));
-    }
-
-    
 }
-            

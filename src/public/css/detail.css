@@ -1,38 +1,90 @@
-.detail {
+.detail-content {
+    width: 1380px;
     display: flex;
     align-items: flex-start;
     gap: 30px;
     margin-top: 40px;
 }
-.item-card {
+.product-card {
     padding: 15px;
     text-align: center;
     margin: 60px;
 }
-.item-image {
-    max-width: 650px;
+.product-image {
+    max-width: 630px;
     height: auto;
 }
-.item-info {
+.product-info {
     max-width: 600px;
     margin-left: 60px;
 }
-.item-info h2 {
-    margin-top: 0;
+.product-name {
     font-size: 45px;
+    margin-top: 40px;
+    font-weight: bold;
 }
-.item-info h3 {
-    margin-top: 30px;;
-    font-size: 50px;
+.product-brand {
+    font-size: 15px;
+    margin-top: 5px;
 }
-.item-info h4 {
-    margin-top: 15px;
-    font-size: 20px;
+.product-price {
+    font-size: 40px;
+    margin-top: 10px;
 }
-.item-info p {
-    margin-top: 15px;
-    font-size: 20px;
+.product-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
 }
+.comment-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+.like-submit {
+    font-size: 40px;
+    
+    margin-bottom: 60px;
+    padding: 10px;
+    width: 180px;
+    height: 50px;
+    border:none;
+    border-radius: 15px;
+    background-color: transparent;
+    
+
+}
+.unlike-submit {
+    font-size: 40px;
+     margin-bottom: 60px;
+    padding: 10px;
+    width: 180px;
+    height: 50px;
+    border:none;
+    border-radius: 15px;
+    background-color: transparent;
+}
+
+.comment-icon {
+ 
+    font-size: 40px;
+    margin-bottom: 5px;
+    padding: 10px;
+    width: 180px;
+    height: 50px;
+    border: none;
+    border-radius: 15px;
+    background-color: transparent;
+}
+
+.comment-number {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    margin-right: 100px;
+}
+
 
 .purchase_btn {
     padding: 10px;
@@ -46,28 +98,31 @@
     font-size: 25px;
     font-weight: 600;
 }
-
-.like-submit {
-    font-size: 40px;
-    
-    margin-bottom: 50px;
-    padding: 10px;
-    width: 180px;
-    height: 50px;
-    border:none;
-    border-radius: 15px;
-    background-color: transparent;
-    
-
+.product-description h3 {
+    margin-top: 15px;
+    font-size: 30px;
 }
-.unlike-submit {
-    font-size: 40px;
-   
-     margin-bottom: 50px;
-    padding: 10px;
-    width: 180px;
-    height: 50px;
-    border:none;
-    border-radius: 15px;
-    background-color: transparent;
+.product-details h3 {
+    margin-top: 15px;
+    font-size: 30px;
+}
+.product-details strong {
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 40px;
+}
+.product-details p {
+    font-size: 15px;
+}
+.comment-heading {
+    font-size: 25px;
+    color: #9d9a9a;
+}
+.comment-view {
+background-color: #e9e5e5;
+}
+.comment-content {
+    margin: 3px;
+    
 }

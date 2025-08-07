@@ -19,17 +19,24 @@
     width: 55%;
     text-align: center;
 }
+.form__group {
+    margin-bottom: 15px;
+}
 .form__group-title {
     text-align: left;
+  font-size: 20px;
+font-weight: bold;
+  font-size: 20px;
 }
+
 .form__label--item {
     font-size: 25px;
     font-weight: 500;
 }
 .profile-form__btn {
     padding: 10px;
-    width: 500px;
-    height: 55px;
+    width: 680px;
+    height: 50px;
     border: none;
     border-radius: 5px;
     background: #f84e4e;
@@ -39,9 +46,28 @@
     font-weight: 600;
     margin-top: 60px;
 }
+.form__input--text input {
+     padding: 10px;
+  width: 680px;
+  height: 40px;
+  border: 1px solid #0c0000;
+  border-radius: 3px;
+  text-align: center;
+
+}
+.file-input {
+    display: none;
+}
 .profile-image {
-    width: 150px;
-    height: 150px;
+    display: flex;
+    align-items: center;
+}
+.profile-icon {
+    width: 80px;
+    height: 80px;
     object-fit: cover;
     border-radius: 50%;
+    border: 2px solid #b0aeae;
+    cursor: pointer;
 }
+

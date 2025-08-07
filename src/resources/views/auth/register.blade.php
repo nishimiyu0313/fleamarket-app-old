@@ -82,7 +82,7 @@
                         </div>
                     </form>
                     <div class="login__link">
-                        <a class="login__button-submit" href="/login">ログインの方はこちら</a>
+                        <a class="login__button-submit" href="/login">ログインはこちら</a>
                     </div>
                 </div>
             </div>

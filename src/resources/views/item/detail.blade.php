@@ -5,50 +5,86 @@
 @endsection
 
 @section('content')
-<div class="detail">
-    <div class="item-card">
-        <img src="{{ '/storage/' . $item['image'] }}" alt=" 商品画像" class="item-image">
+<div class="detail-content">
+    <div class="product-card">
+        <img src="{{ '/storage/' . $item['image'] }}" alt=" 商品画像" class="product-image">
     </div>
-    <div class="item-info">
-        <h2>{{ $item->name }}</h2>
-        <p>{{ $item->brand_name }}</p>
-        <h3>￥{{ $item->price }}（税込）</h3>
+    <div class="product-info">
+        <p class="product-name">{{ $item->name }}</p>
+        <p class="product-brand">{{ $item->brand_name }}</p>
+        <p class="product-price">￥{{ $item->price }}（税込）</p>
 
-        @if (Auth::check() && $item->likedUsers->contains(Auth::user()))
-        <form method="POST" action="/item/{{ $item['id'] }}/unlike ">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="unlike-submit">★</button>
-        </form>
-        @else
-        <form method="POST" action="/item/{{ $item['id'] }}/like ">
-            @csrf
-            <button type="submit" class="like-submit">☆</button>
-        @endif
-
-
-
-            <form class="purchase-form" action="/purchase/{{ $item['id'] }}" method="post">
+        <div class="product-icon">
+            @if (Auth::check() && $item->likedUsers->contains(Auth::user()))
+            <form method="POST" action="/item/{{ $item['id'] }}/unlike">
                 @csrf
-                <input class="purchase_btn " type="submit" value="購入手続きへ">
+                @method('DELETE')
+                <button type="submit" class="unlike-submit">★</button>
             </form>
+            @else
+            <form method="POST" action="/item/{{ $item['id'] }}/like">
+                @csrf
+                <button type="submit" class="like-submit">☆</button>
+            </form>
+            @endif
+
+            <div class="comment-box">
+                <span class="comment-icon">💬</span>
+                <span class="comment-number">{{ $item->comments_count }}</span>
+            </div>
+        </div>
+        <form class="purchase-form" action="/purchase/{{ $item['id'] }}" method="post">
+            @csrf
+            <input class="purchase_btn " type="submit" value="購入手続きへ">
+        </form>
+        <div class="product-description">
             <h3>商品説明</h3>
             <p>{{ $item->description }}</p>
+        </div>
+        <div class="product-details">
             <h3>商品の情報</h3>
-            <h4>カテゴリー</h4>
-            <h4>商品の状態</h4>
+            <dl>
+                <p><strong>カテゴリー</strong></p>
+                <p><strong>商品の状態</strong>{{ $item->condition->content }}</p>
+            </dl>
+        </div>
+        <div class="comment-section">
+            <h2 class="comment-heading">コメント({{ $item->comments_count }})</h2>
+            @foreach($item->comments as $comment)
 
+            <div class="comment-list">
 
-            <form method="post" action="{{ url('/items/' . $item->id . 'comments') }}">
+                <div class="comment-item">
+                    <div class="comment-user">
+                        <img src="" class="user-icon">
+                        <span class="user-name"></span>
+                    </div>
+                    <div class="comment-view">
+                        <p class="comment-content">{{ $comment->content }}</p>
+                    </div>
+                </div>
+
+            </div>
+            @endforeach
+        </div>
+
+        <div class="comment-form-section">
+            <h3>商品へのコメント</h3>
+            @auth
+            <form action="/item/{{ $item['id'] }}/comments" method="post">
                 @csrf
-                <label>商品へのコメント</label><br>
-                <textarea name="content" rows="3" cols="50" required> {{ old('content') }}</textarea>
+                <textarea class="form-control" name="content" rows="10" cols="70" required>
+                    </textarea>
                 <input class="purchase_btn" type="submit" value="コメントを送信する">
             </form>
+            @endauth
+        </div>
+
+
+
 
     </div>
+
+
 </div>
-
-
-
 @endsection

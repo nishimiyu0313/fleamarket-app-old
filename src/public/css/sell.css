@@ -4,19 +4,25 @@
     max-width: 1230px;
 }
 .sell-form__heading {
-    margin-bottom: 10px;
+   margin-bottom: 10px;
     text-align: center;
-    font-size: 25px;
+    font-size: 20px;
 }
 .form {
     margin: 0 auto;
     width: 55%;
     text-align: center;
 }
-.form__group {
-    margin: 40px;
-}
+.product-detail h2{
+    text-align: left;
+    font-size: 30PX;
+    color: #7c7c7c;
+    margin-left: 30PX;
 
+}
+.form__group {
+  margin: 30px;
+}
 .form__group-title {
     text-align: left;
 }
@@ -33,6 +39,19 @@
   
     appearance: none;
 }
+.file-button {
+    padding: 10px 20px;
+    background-color: white;
+    color: #f84e4e;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-radius: 6px;
+    border: 2px solid #f84e4e;
+}
+.file-input {
+    display: none;
+}
 .sell-form__btn {
     padding: 10px;
     width: 500px;
@@ -46,4 +65,4 @@
     font-weight: 600;
     margin-top: 60px;
 }
-  
+

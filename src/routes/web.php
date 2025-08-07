@@ -23,26 +23,21 @@ Route::get('/item/{item_id}', [ItemController::class, 'detail']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/mylist', [ItemController::class, 'mylist']);
-    Route::post('/item/{item_id}\comments', [ItemController::class, 'storeComment']);
+    Route::post('/item/{item}/like', [ItemController::class, 'like']);
+    Route::delete('/item/{item}/unlike', [ItemController::class, 'unlike']);
+    Route::post('/item/{item}/comments', [ItemController::class, 'commentStore']);
+    Route::get('/sell', [ItemController::class, 'index']);
+    Route::post('/sell', [ItemController::class, 'sell']);
+    Route::get('/mypage/buy', [ItemController::class, 'profileBuy']);
+    Route::get('/mypage/sell', [ItemController::class, 'profileSell']);
 
     Route::get('/mypage/profile', [ProfileController::class, 'index']);
     Route::post('/mypage/profile', [ProfileController::class, 'store']);
     Route::get(' /mypage/profile/{user_id}', [ProfileController::class, 'profile']);
     Route::post(' /mypage/profile/{user_id}', [ProfileController::class, 'updateProfile']);
 
-
     Route::get('/purchase/{item_id}', [PaymentController::class, 'index']);
     Route::post('/purchase/{item_id}', [PaymentController::class, 'index']);
-    Route::post('/item/{item_id}/like', [ItemController::class, 'like']);
-    Route::delete('/item/{item_id}/unlike', [ItemController::class, 'unlike']);
-
     Route::get('/purchase/address/{item_id}', [ProfileController::class, 'address']);
     Route::post('/purchase/address/{item_id}', [ProfileController::class, 'updateAddress']);
-
-    Route::get('/mypage/buy', [ItemController::class, 'profileBuy']);
-    Route::get('/mypage/sell', [ItemController::class, 'profileSell']);
-
-    Route::get('/sell', [ItemController::class, 'index']);
-    Route::post('/sell', [ItemController::class, 'sell']);
-    Route::get('/item/search', [ItemController::class, 'search']);
 });

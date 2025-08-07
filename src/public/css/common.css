@@ -5,6 +5,8 @@
     justify-content: space-between;
     background: #050505;
     height: 80px;
+    width: 100%;
+    max-width: 1550px;
 }
 
 .header__heading {
@@ -13,6 +15,7 @@
     font-weight: bold;
     font-size: 35px;
     margin: 10px;
+    padding-left: 15px;
 }
 
 
@@ -61,4 +64,5 @@
     border: none;
     margin: 5px;
     font-size: 25px;
+    margin-right: 10px;
 }
