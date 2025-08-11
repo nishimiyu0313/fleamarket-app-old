@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="content">
-    <form class="profile-form" action="/mypage/profile/{{ auth()->user()->id }}" method="get">
+    <form class="profile-form" action="/mypage/profile/{{ auth()->user()->id }}" method="get" novalidate>
         @csrf
         <input class="profile-form__btn" type="submit" value="プロフィールを編集">
     </form>

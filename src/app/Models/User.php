@@ -56,5 +56,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Item::class, 'buyer_id');
     }
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
         
     }

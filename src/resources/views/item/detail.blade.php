@@ -16,13 +16,13 @@
 
         <div class="product-icon">
             @if (Auth::check() && $item->likedUsers->contains(Auth::user()))
-            <form method="POST" action="/item/{{ $item['id'] }}/unlike">
+            <form method="POST" action="/item/{{ $item['id'] }}/unlike" novalidate>
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="unlike-submit">★</button>
             </form>
             @else
-            <form method="POST" action="/item/{{ $item['id'] }}/like">
+            <form method="POST" action="/item/{{ $item['id'] }}/like" novalidate>
                 @csrf
                 <button type="submit" class="like-submit">☆</button>
             </form>
@@ -33,7 +33,7 @@
                 <span class="comment-number">{{ $item->comments_count }}</span>
             </div>
         </div>
-        <form class="purchase-form" action="/purchase/{{ $item['id'] }}" method="post">
+        <form class="purchase-form" action="/purchase/{{ $item['id'] }}" method="post" novalidate>
             @csrf
             <input class="purchase_btn " type="submit" value="購入手続きへ">
         </form>
@@ -71,7 +71,7 @@
         <div class="comment-form-section">
             <h3>商品へのコメント</h3>
             @auth
-            <form action="/item/{{ $item['id'] }}/comments" method="post">
+            <form action="/item/{{ $item['id'] }}/comments" method="post" novalidate>
                 @csrf
                 <textarea class="form-control" name="content" rows="10" cols="70" required>
                     </textarea>

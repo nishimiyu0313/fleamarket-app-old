@@ -10,7 +10,7 @@
     <div class="sell-form__heading">
         <h1>商品の出品</h1>
     </div>
-    <form class="form" action="/sell" method="post" enctype="multipart/form-data">
+    <form class="form" action="/sell" method="post" enctype="multipart/form-data" novalidate>
         @csrf
         <div class="form__group">
             <div class="form__group-title">
@@ -26,7 +26,7 @@
                     <span class="form__label--item">カテゴリー</span>
                 </div>
                 <div class="category-list">
-                    
+
                 </div>
             </div>
             <div class="form__group">

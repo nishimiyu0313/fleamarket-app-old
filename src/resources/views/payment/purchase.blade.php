@@ -30,7 +30,7 @@
         </div>
         <div class="address">
             <h3>配送先</h3>
-            <form class="purchase-form" action="/purchase/address/{{ $item['id'] }}" method="get">
+            <form class="purchase-form" action="/purchase/address/{{ $item['id'] }}" method="get" novalidate>
                 @csrf
                 <input class="purchase_btn " type="submit" value="変更する">
             </form>

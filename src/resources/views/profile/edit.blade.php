@@ -13,7 +13,7 @@
         <div class="profile-form__heading">
             <h2>プロフィール設定</h2>
         </div>
-        <form class="form" action="/mypage/profile" method="post" enctype="multipart/form-data">
+        <form class="form" action="/mypage/profile/{{ auth()->user()->id }}" method="post" enctype="multipart/form-data" novalidate>
             @csrf
             <div class="profile__image">
                 <img src=" {{ isset($profile['image']) ? asset('storage/' . $profile['image']) : asset('default.png') }}" alt="アイコン画像"
@@ -29,9 +29,9 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--text">
-                        <input type="text" name="name" value="" />
+                        <input type="text" name="name" value="{{ $profile->name }}" />
                     </div>
-                    <div class="form__error">
+                    <div class=" form__error">
 
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--text">
-                        <input type="text" name="postal_code" value="" />
+                        <input type="text" name="postal_code" value="{{ $profile->postal_code }}" />
                     </div>
                     <div class="form__error">
 
@@ -55,7 +55,7 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--text">
-                        <input type="text" name="address" value="" />
+                        <input type="text" name="address" value="{{ $profile->address }}">
                     </div>
                     <div class="form__error">
 
@@ -68,7 +68,7 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--text">
-                        <input type="text" name="building" value="" />
+                        <input type="text" name="building" value="{{ $profile->building }}" />
                     </div>
                     <div class="form__error">
 

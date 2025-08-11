@@ -14,14 +14,16 @@ class ItemController extends Controller
 {
     public function list()
     {
-        $items = Item::Paginate(8);
+        $items = Item::orderBy('created_at', 'desc')->Paginate(8);
         return view('item.index', compact('items'));
     }
     public function mylist()
     {
         /** @var \App\Models\User $user */
         $user = Auth::user();
-        $favoriteItems = $user->likedItems()->latest()->paginate(8);
+        $favoriteItems = $user->likedItems()
+            ->orderBy('likes.created_at', 'desc')
+            ->paginate(8);
 
 
         return view('item.mylist', compact('favoriteItems', 'user'));
@@ -34,9 +36,8 @@ class ItemController extends Controller
     public function like(Item $item)
     {
         $user = Auth::user();
-        $item->likedUsers()->attach($user->id);
-
-        return redirect()->back(); 
+        $item->likedUsers()->syncWithoutDetaching([$user->id]);
+        return redirect()->back();
     }
 
     public function unlike(Item $item)
@@ -45,6 +46,18 @@ class ItemController extends Controller
         $item->likedUsers()->detach($user->id);
 
         return redirect()->back();
+    }
+
+    public function likedItems()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        $items = $user->likedItems()
+            ->orderBy('pivot_created_at', 'desc')
+            ->get();
+
+        return view('items.index', compact('items'));
     }
 
     public function commentStore(Request $request, Item $item)
@@ -61,20 +74,20 @@ class ItemController extends Controller
     {
         $categories = Category::all();
         $conditions = Condition::all();
-        return view('item.sell', compact('conditions', 'categories'));
 
-        return view('item.sell');
+        $items = Item::orderBy('created_at', 'desc')->get();
+        
+        return view('item.sell', compact('conditions', 'categories', 'items'));
     }
     public function sell(Request $request)
     {
         $imagePath = $request->image->store('images', 'public');
-        $conditions = Condition::all();      
-
+        $conditions = Condition::all();
 
 
         $item = Item::create([
             'name' => $request->name,
-           
+
             'condition_id' => $request->condition_id,
             'brand_name' => $request->brand_name,
             'description' => $request->description,
@@ -82,6 +95,7 @@ class ItemController extends Controller
             'image' => $imagePath,
             'user_id' => Auth::id()
         ]);
+        
         return view('item.sell', compact('imagePath', 'item', 'conditions'));
     }
 

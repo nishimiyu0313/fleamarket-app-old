@@ -22,6 +22,7 @@
                     <img src="{{ '/storage/' . $item['image'] }}" alt=" 商品画像" class="products-image">
                 </a>
                 <div class="item-name">{{ $item->name }}</div>
+
             </div>
             @endforeach
         </div>

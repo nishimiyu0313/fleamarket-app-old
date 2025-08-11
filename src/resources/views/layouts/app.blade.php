@@ -15,21 +15,21 @@
         <header class="header">
             <a class="header__heading" href="/">COACHTECH</a>
             <form class="search-form" action="" method="">
-                <input class="search-form__keyword-input" type="text" placeholder="なにをお探しですか？" value="">
+                <input class="search-form__keyword-input" type="text" placeholder="なにをお探しですか？" value="" novalidate>
             </form>
             <ul class="header-nav">
                 <li class="header-nav__item">
                     @if (Auth::check())
-                    <form class="form" action="/logout" method="post">
+                    <form class="form" action="/logout" method="post" novalidate>
                         @csrf
                         <button class="header-nav__button">ログアウト</button>
                     </form>
                     @endif
 
-                    <form class="mypage__form" action="/mypage/sell" method="get">
+                    <form class="mypage__form" action="/mypage/sell" method="get" novalidate>
                         <button class="header-nav__button">マイページ</button>
                     </form>
-                    <form class="sell__form" action="/sell" method="get">
+                    <form class="sell__form" action="/sell" method="get" novalidate>
                         <button class="header-nav__button-sell">出品</button>
                     </form>
                 </li>

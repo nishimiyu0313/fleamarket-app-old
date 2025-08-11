@@ -21,7 +21,7 @@ class ProfileController extends Controller
         $user = auth()->user();
 
 
-        $profile = $request->only([
+        $profileData = $request->only([
             'name',
             'postal_code',
             'address',
@@ -29,16 +29,18 @@ class ProfileController extends Controller
         ]);
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('images', 'public');
-            $user->profile->image = $path;
-            $user->profile->save();
+            $profileData['image'] = $path;
         }
-        $profile['user_id'] = $user->id;
-        Profile::create($profile);
+
+        $profileData['user_id'] = $user->id;
+        Profile::create($profileData);
         return redirect('/');
     }
     public function  profile(Request $request)
     {
-        $profile = Auth::user();
+        $profile = Auth::user()->profile;
+
+
         return view('profile.edit', compact('profile'));
     }
     public function updateProfile(Request $request)
@@ -51,29 +53,41 @@ class ProfileController extends Controller
         $profile->building =  $request->input('building');
 
 
+
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('images', 'public');
-            $profile['image'] = $path;
+            $profile->image = $path;
         }
         $profile->save();
-        return redirect('/');
+        return redirect()->action([ProfileController::class, 'profile']);
     }
     public function  address($id)
     {
         $item = Item::find($id);
-        $user = Auth::user();
-        return view('payment.address', compact('user', 'item'));
+        $profile = Auth::user()->profile;
+        return view('payment.address', compact('profile', 'item'));
     }
-    public function  updateAddress(Request $request)
+    public function  updateAddress(Request $request, $id)
     {
         $user = Auth::user();
+        $profile = Auth::user()->profile;
+        $item = Item::find($id);
+
+
         $address = $request->only([
             'postal_code',
             'address',
             'building',
         ]);
+        $address['user_id'] = $user->id;
+        $address['item_id'] = $id;
 
         Payment::create($address);
-        return redirect('payment.purchase', compact('address', 'user'));
+
+        $payment = Payment::where('user_id', $user->id)
+            ->where('item_id', $id)
+            ->latest()
+            ->first();
+        return view('payment.address', compact('item', 'profile', 'payment'));
     }
 }

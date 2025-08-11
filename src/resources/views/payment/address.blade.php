@@ -10,7 +10,7 @@
         <div class="address-form__heading">
             <h2>住所の変更</h2>
         </div>
-        <form class="form" action="/purchase/address/{{ $item['id'] }}" method=" post">
+        <form class="form" action="/purchase/address/{{ $item->id }}" method="post" novalidate>
             @csrf
             <div class="form__group">
                 <div class="form__group-title">
@@ -18,7 +18,7 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--text">
-                        <input type="text" name="postal_code" value="{{ old('postal_code') }}" />
+                        <input type="text" name="postal_code" value="{{ $payment->postal_code ?? $profile->postal_code ?? '' }}" />
 
                     </div>
                     <div class="form__error">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--text">
-                        <input type="text" name="address" value="{{ old('address') }}" />
+                        <input type="text" name="address" value="{{ $payment->address ?? $profile->address ?? '' }}" />
 
                     </div>
                     <div class="form__error">
@@ -46,7 +46,7 @@
                 </div>
                 <div class="form__group-content">
                     <div class="form__input--text">
-                        <input type="text" name="building" value="{{ old('building') }}" />
+                        <input type="text" name="building" value="{{  $payment->building ?? $profile->building ?? '' }}" />
 
 
                     </div>

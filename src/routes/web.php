@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/mylist', [ItemController::class, 'mylist']);
     Route::post('/item/{item}/like', [ItemController::class, 'like']);
     Route::delete('/item/{item}/unlike', [ItemController::class, 'unlike']);
+    Route::get('/items/liked', [ItemController::class, 'likedItems']);
     Route::post('/item/{item}/comments', [ItemController::class, 'commentStore']);
     Route::get('/sell', [ItemController::class, 'index']);
     Route::post('/sell', [ItemController::class, 'sell']);
