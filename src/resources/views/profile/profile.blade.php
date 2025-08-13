@@ -21,6 +21,12 @@
 
                 <label for="image" class="file-button">画像を選択する</label>
                 <input type="file" id="image" name="image" class="file-input">
+                <div class="form__error">
+                    @error('image')
+                    {{ $message }}
+                    @enderror
+
+                </div>
 
 
             </div>
@@ -33,6 +39,9 @@
                         <input type="text" name="name" value="{{ old('name') }}" />
                     </div>
                     <div class="form__error">
+                        @error('name')
+                        {{ $message }}
+                        @enderror
 
                     </div>
                 </div>
@@ -46,6 +55,9 @@
                         <input type="text" name="postal_code" value="{{ old('postal_code') }}" />
                     </div>
                     <div class="form__error">
+                        @error('postal_code')
+                        {{ $message }}
+                        @enderror
 
                     </div>
                 </div>
@@ -59,6 +71,9 @@
                         <input type="text" name="address" value="{{ old('address') }}" />
                     </div>
                     <div class="form__error">
+                        @error('address')
+                        {{ $message }}
+                        @enderror
 
                     </div>
                 </div>
@@ -71,9 +86,7 @@
                     <div class="form__input--text">
                         <input type="text" name="building" value="{{ old('building') }}" />
                     </div>
-                    <div class="form__error">
-
-                    </div>
+                    
                 </div>
             </div>
 

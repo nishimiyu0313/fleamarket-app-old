@@ -18,6 +18,12 @@
             </div>
             <label for="image" class="file-button">画像を選択する</label>
             <input type="file" id="image" name="image" class="file-input" required>
+            <div class="register-form__error-message">
+                @error('image')
+                {{ $message }}
+                @enderror
+            </div>
+
         </div>
         <div class="product-detail">
             <h2>商品の詳細</h2>
@@ -54,6 +60,9 @@
                         value="{{ old('name') }}">
                 </div>
                 <div class="register-form__error-message">
+                    @error('name')
+                    {{ $message }}
+                    @enderror
 
                 </div>
             </div>
@@ -78,6 +87,10 @@
                         value="{{ old('description') }}"></textarea>
                 </div>
                 <div class="register-form__error-message">
+                    @error('description')
+                    {{ $message }}
+                    @enderror
+
 
                 </div>
             </div>
@@ -90,6 +103,9 @@
                         value="{{ old('price') }}">
                 </div>
                 <div class="register-form__error-message">
+                    @error('price')
+                    {{ $message }}
+                    @enderror
 
                 </div>
 

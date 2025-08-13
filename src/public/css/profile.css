@@ -20,8 +20,8 @@
 .form__group-title {
     text-align: left;
     margin-left: 20px;
-  font-weight: bold;
-  font-size: 20px;
+    font-weight: bold;
+    font-size: 20px;
 }
 .form__label--item {
     font-size: 25px;
@@ -41,13 +41,12 @@
     margin-top: 60px;
 }
 .form__input--text input {
-     padding: 10px;
-  width: 680px;
-  height: 40px;
-  border: 1px solid #0c0000;
-  border-radius: 3px;
-  text-align: center;
-
+    padding: 10px;
+    width: 680px;
+    height: 40px;
+    border: 1px solid #0c0000;
+    border-radius: 3px;
+    text-align: center;
 }
 .file-button {
     padding: 10px 20px;
@@ -74,4 +73,10 @@
     border-radius: 50%;
     border: 2px solid #b0aeae;
     cursor: pointer;
+}
+.form__error {
+    margin-top: 2px;
+    height: 20px;
+    color: #ff0000;
+    text-align: left;
 }

@@ -49,6 +49,7 @@
    font-weight: 500;
    font-size: 30px;
 }
+
 .product-detail h3 {
     margin-top: 30px;;
     font-size: 40px;
@@ -92,4 +93,13 @@ padding-left: 30px;
     font-size: 25px;
     font-weight: 600;
     
+}
+.btn-address {
+    margin-left: 80px;
+    color: #0073CC;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: 400px;
+    margin-bottom: 60px;
+    font-size: 15px;
 }

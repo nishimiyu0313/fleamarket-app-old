@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ExhibitionRequest;
 use App\Models\Item;
 use App\Models\Comment;
 use App\Models\Condition;
@@ -79,7 +80,7 @@ class ItemController extends Controller
         
         return view('item.sell', compact('conditions', 'categories', 'items'));
     }
-    public function sell(Request $request)
+    public function sell(ExhibitionRequest $request)
     {
         $imagePath = $request->image->store('images', 'public');
         $conditions = Condition::all();
@@ -109,5 +110,18 @@ class ItemController extends Controller
     public function  profileBuy(Request $request)
     {
         return view('item.profilesbuy',);
+    }
+
+    public function search(Request $request)
+    {
+        $query = Item::query();
+
+        if ($request->keyword) { 
+            $query = $query->where('name', 'LIKE', "%{$request->keyword}%");
+        }
+
+        $items = $query->orderBy('created_at', 'desc')->get(); 
+
+        return view('item.index', compact('items')); 
     }
 }

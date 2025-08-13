@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ProfileRequest;
 use App\Models\Profile;
 use App\Models\Payment;
 use App\Models\Item;
@@ -16,7 +17,7 @@ class ProfileController extends Controller
 
         return view('profile.profile', compact('user'));
     }
-    public function store(Request $request)
+    public function store(ProfileRequest $request)
     {
         $user = auth()->user();
 
@@ -70,7 +71,7 @@ class ProfileController extends Controller
     public function  updateAddress(Request $request, $id)
     {
         $user = Auth::user();
-        $profile = Auth::user()->profile;
+        $profile = $user->profile;
         $item = Item::find($id);
 
 
@@ -78,16 +79,19 @@ class ProfileController extends Controller
             'postal_code',
             'address',
             'building',
+            'content',
         ]);
         $address['user_id'] = $user->id;
         $address['item_id'] = $id;
+       
 
-        Payment::create($address);
-
-        $payment = Payment::where('user_id', $user->id)
+        $lastPayment = Payment::where('user_id', $user->id)
             ->where('item_id', $id)
             ->latest()
             ->first();
+        
+
+        $payment = Payment::create($address);
         return view('payment.address', compact('item', 'profile', 'payment'));
     }
 }
