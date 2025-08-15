@@ -19,6 +19,7 @@
                 <div class="login-form__heading">
                     <h2>ログイン</h2>
                 </div>
+                
                 <form class="form" action="/login" method="post" novalidate>
                     @csrf
                     <div class="form__group">
@@ -31,7 +32,9 @@
                             </div>
                             <div class="form__error">
                                 @error('email')
-                                {{ $message }}
+                                <div class="text-danger" style="font-size: 0.9em; margin-top: 4px;">
+                                    {{ $message }}
+                                </div>
                                 @enderror
                             </div>
                         </div>
@@ -46,7 +49,9 @@
                             </div>
                             <div class="form__error">
                                 @error('password')
-                                {{ $message }}
+                                <div class="text-danger" style="font-size: 0.9em; margin-top: 4px;">
+                                    {{ $message }}
+                                </div>
                                 @enderror
                             </div>
                         </div>

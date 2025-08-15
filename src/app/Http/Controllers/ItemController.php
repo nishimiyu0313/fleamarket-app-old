@@ -120,6 +120,8 @@ class ItemController extends Controller
 
     public function search(Request $request)
     {
+        $keyword = $request->input('keyword'); 
+        
         $query = Item::query();
 
         if ($request->keyword) {

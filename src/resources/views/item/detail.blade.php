@@ -46,7 +46,7 @@
             <dl>
                 <p><strong>カテゴリー</strong>
                     @foreach ($item->categories as $category)
-                    {{ $category->content }}
+                    <span class="category-label">{{ $category->content }}</span>
                     @endforeach
                 </p>
                 <p><strong>商品の状態</strong>{{ $item->condition->content }}</p>

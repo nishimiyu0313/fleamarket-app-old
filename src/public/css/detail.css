@@ -126,3 +126,12 @@ background-color: #e9e5e5;
     margin: 3px;
     
 }
+.category-label {
+    background-color: #c4c4c4; 
+    color: #333;
+    padding: 4px 10px;
+    border-radius: 4px; 
+    margin-right: 8px; 
+    display: inline-block; 
+    font-size: 14px; 
+}
