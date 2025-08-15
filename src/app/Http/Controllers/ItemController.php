@@ -88,8 +88,7 @@ class ItemController extends Controller
 
 
         $item = Item::create([
-            'name' => $request->name,
-            'category_id' => $request->category_id,
+            'name' => $request->name,        
             'condition_id' => $request->condition_id,
             'brand_name' => $request->brand_name,
             'description' => $request->description,
@@ -97,7 +96,12 @@ class ItemController extends Controller
             'image' => $imagePath,
             'user_id' => Auth::id()
         ]);
+      
+
+        
         $item->categories()->sync($request->category_ids ?? []);
+     
+        
 
         return view('item.sell', compact('imagePath', 'item', 'conditions', 'categories'));
     }

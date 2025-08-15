@@ -33,7 +33,7 @@
                 </div>
                 <div class="category-list">
                     @foreach ($categories as $category)
-                    <input type="checkbox" name="category_id" value="{{ $category->id }}" id="category" required>
+                    <input type="checkbox" name="category_ids[]" value=" {{ $category->id }}" id="category" required>
                     <label class="category-option" for="category">
                         {{ $category->content }}
                     </label>
