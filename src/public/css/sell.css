@@ -72,4 +72,24 @@
     text-align: left;
 }
 
+.custom-checkbox {
+    color: red; /* 文字を赤くする */
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.custom-checkbox input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgb(255, 61, 61);       /* 枠を赤に */
+    background-color: white;     /* 背景白 */
+    cursor: pointer;
+    position: relative;
+    border-radius: 3px;
+}
+
 

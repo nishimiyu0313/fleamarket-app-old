@@ -30,9 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/item/{item}/comments', [ItemController::class, 'commentStore']);
     Route::get('/sell', [ItemController::class, 'index']);
     Route::post('/sell', [ItemController::class, 'sell']);
-    Route::get('/mypage/buy', [ItemController::class, 'profileBuy']);
+    Route::get('/mypage/buy', [ItemController::class, 'profileBuy'])-> name('item.profilebuy');
     Route::get('/mypage/sell', [ItemController::class, 'profileSell']);
-
 
     Route::get('/mypage/profile', [ProfileController::class, 'index']);
     Route::post('/mypage/profile', [ProfileController::class, 'store']);

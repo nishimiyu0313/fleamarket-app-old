@@ -17,12 +17,12 @@ class PaymentController extends Controller
         $user = Auth::user();
         $profile = $user->profile;
         $payments = Payment::select('content')->distinct()->get();
-        return view('payment.purchase',compact('item', 'user', 'payments', 'profile'));
+        return view('payment.purchase', compact('item', 'user', 'payments', 'profile'));
     }
-    public  function payment(Request $request)
+    public  function payment(Request $request, $id)
     {
-        $item = Item::find($request->product_id);
-
+        $item = Item::find($id);
+        $user = Auth::user();
         Payment::create([
             'user_id' => Auth::id(),
             'item_id' => $item->id,
@@ -32,7 +32,7 @@ class PaymentController extends Controller
             'building' => $request->building,
 
         ]);
-        return view('payment.purchase');
+        
+        return redirect('/');
     }
-}
-
+    }

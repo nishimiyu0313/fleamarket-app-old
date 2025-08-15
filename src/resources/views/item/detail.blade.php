@@ -44,7 +44,11 @@
         <div class="product-details">
             <h3>商品の情報</h3>
             <dl>
-                <p><strong>カテゴリー</strong></p>
+                <p><strong>カテゴリー</strong>
+                    @foreach ($item->categories as $category)
+                    {{ $category->content }}
+                    @endforeach
+                </p>
                 <p><strong>商品の状態</strong>{{ $item->condition->content }}</p>
             </dl>
         </div>

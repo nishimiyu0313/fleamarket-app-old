@@ -31,7 +31,7 @@ class ItemController extends Controller
     }
     public function detail($id)
     {
-        $item = Item::with(['condition'])->withCount('comments')->findOrFail($id);
+        $item = Item::with(['condition', 'categories', 'category'])->withCount('comments')->findOrFail($id);
         return view('item.detail', compact('item'));
     }
     public function like(Item $item)
@@ -77,18 +77,19 @@ class ItemController extends Controller
         $conditions = Condition::all();
 
         $items = Item::orderBy('created_at', 'desc')->get();
-        
+
         return view('item.sell', compact('conditions', 'categories', 'items'));
     }
     public function sell(ExhibitionRequest $request)
     {
         $imagePath = $request->image->store('images', 'public');
         $conditions = Condition::all();
+        $categories = Category::all();
 
 
         $item = Item::create([
             'name' => $request->name,
-
+            'category_id' => $request->category_id,
             'condition_id' => $request->condition_id,
             'brand_name' => $request->brand_name,
             'description' => $request->description,
@@ -96,8 +97,9 @@ class ItemController extends Controller
             'image' => $imagePath,
             'user_id' => Auth::id()
         ]);
-        
-        return view('item.sell', compact('imagePath', 'item', 'conditions'));
+        $item->categories()->sync($request->category_ids ?? []);
+
+        return view('item.sell', compact('imagePath', 'item', 'conditions', 'categories'));
     }
 
 
@@ -116,12 +118,12 @@ class ItemController extends Controller
     {
         $query = Item::query();
 
-        if ($request->keyword) { 
+        if ($request->keyword) {
             $query = $query->where('name', 'LIKE', "%{$request->keyword}%");
         }
 
-        $items = $query->orderBy('created_at', 'desc')->get(); 
+        $items = $query->orderBy('created_at', 'desc')->get();
 
-        return view('item.index', compact('items')); 
+        return view('item.index', compact('items'));
     }
 }
