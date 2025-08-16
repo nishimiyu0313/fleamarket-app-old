@@ -44,23 +44,25 @@ class ProfileController extends Controller
 
         return view('profile.edit', compact('profile'));
     }
-    public function updateProfile(Request $request)
-    {
+    public function updateProfile(ProfileRequest $request)
+        
+    {       
         $profile = Auth::user()->profile;
 
         $profile->name = $request->input('name');
         $profile->postal_code = $request->input('postal_code');
         $profile->address =  $request->input('address');
         $profile->building =  $request->input('building');
-
-
+       
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('images', 'public');
             $profile->image = $path;
         }
+        
         $profile->save();
-        return redirect()->action([ProfileController::class, 'profile']);
+        
+        return redirect('/mypage/sell');
     }
     public function  address($id)
     {

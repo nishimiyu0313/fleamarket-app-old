@@ -24,16 +24,18 @@ Route::get('/item/{item_id}', [ItemController::class, 'detail']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/mylist', [ItemController::class, 'mylist']);
+    Route::get('/product/search', [ItemController::class, 'search']);
     Route::post('/item/{item}/like', [ItemController::class, 'like']);
     Route::delete('/item/{item}/unlike', [ItemController::class, 'unlike']);
     Route::get('/items/liked', [ItemController::class, 'likedItems']);
     Route::post('/item/{item}/comments', [ItemController::class, 'commentStore']);
     Route::get('/sell', [ItemController::class, 'index']);
     Route::post('/sell', [ItemController::class, 'sell']);
-    Route::get('/mypage/buy', [ItemController::class, 'profileBuy'])-> name('item.profilebuy');
+    Route::get('/mypage/buy', [ItemController::class, 'profileBuy'])->name('item.profilebuy');
     Route::get('/mypage/sell', [ItemController::class, 'profileSell']);
-    Route::get('/item/search', [ItemController::class, 'search']);
    
+
+
 
     Route::get('/mypage/profile', [ProfileController::class, 'index']);
     Route::post('/mypage/profile', [ProfileController::class, 'store']);

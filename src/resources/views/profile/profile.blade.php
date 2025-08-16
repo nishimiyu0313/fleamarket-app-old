@@ -16,7 +16,7 @@
         <form class="form" action="/mypage/profile" method="post" enctype="multipart/form-data" novalidate>
             @csrf
             <div class="profile__image">
-                <img src=" {{ isset($profile['image']) ? asset('storage/' . $profile['image']) : asset('default.png') }}" alt="アイコン画像"
+                <img src=" {{ isset($profile['image']) ? asset('storage/' . $profile['image']) : asset('/img/default.jpg') }}" alt="アイコン画像"
                     class="profile-icon">
 
                 <label for="image" class="file-button">画像を選択する</label>
@@ -86,7 +86,7 @@
                     <div class="form__input--text">
                         <input type="text" name="building" value="{{ old('building') }}" />
                     </div>
-                    
+
                 </div>
             </div>
 

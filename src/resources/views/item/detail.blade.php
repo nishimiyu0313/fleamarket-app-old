@@ -26,12 +26,18 @@
                 @csrf
                 <button type="submit" class="like-submit">☆</button>
             </form>
+
             @endif
+            <div class="like-count">
+                {{ $item->liked_users_count }}
+            </div>
+
 
             <div class="comment-box">
                 <span class="comment-icon">💬</span>
                 <span class="comment-number">{{ $item->comments_count }}</span>
             </div>
+
         </div>
         <form class="purchase-form" action="/purchase/{{ $item['id'] }}" method="post" novalidate>
             @csrf
@@ -82,6 +88,13 @@
                 <input class="purchase_btn" type="submit" value="コメントを送信する">
             </form>
             @endauth
+            <div class="form__error">
+                @error('content')
+                <div class="text-danger" style="font-size: 0.9em; margin-top: 4px; color:red">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
         </div>
 
 

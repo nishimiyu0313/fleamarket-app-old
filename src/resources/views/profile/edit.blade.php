@@ -20,6 +20,12 @@
                     class="profile-icon">
                 <label for="image" class="file-button">画像を選択する</label>
                 <input type="file" id="image" name="image" class="file-input">
+                <div class="form__error">
+                    @error('image')
+                    {{ $message }}
+                    @enderror
+
+                </div>
 
 
             </div>
@@ -32,6 +38,10 @@
                         <input type="text" name="name" value="{{ $profile->name }}" />
                     </div>
                     <div class=" form__error">
+                        @error('name')
+                        {{ $message }}
+                        @enderror
+
 
                     </div>
                 </div>
@@ -45,7 +55,9 @@
                         <input type="text" name="postal_code" value="{{ $profile->postal_code }}" />
                     </div>
                     <div class="form__error">
-
+                        @error('postal_code')
+                        {{ $message }}
+                        @enderror
                     </div>
                 </div>
             </div>
@@ -58,6 +70,10 @@
                         <input type="text" name="address" value="{{ $profile->address }}">
                     </div>
                     <div class="form__error">
+                        @error('address')
+                        {{ $message }}
+                        @enderror
+
 
                     </div>
                 </div>

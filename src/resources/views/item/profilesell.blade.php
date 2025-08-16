@@ -6,6 +6,15 @@
 
 @section('content')
 <div class="content">
+    <div class="profile__info">
+        <img src=" {{ isset($profile['image']) ? asset('storage/' . $profile['image']) : asset('default.png') }}" alt="アイコン画像"
+            class="profile-icon">
+        <p class="profile-name">{{ $profile->name }}</p>
+        
+    </div>
+   
+
+
     <form class="profile-form" action="/mypage/profile/{{ auth()->user()->id }}" method="get" novalidate>
         @csrf
         <input class="profile-form__btn" type="submit" value="プロフィールを編集">

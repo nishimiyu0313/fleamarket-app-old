@@ -1,6 +1,24 @@
 .content {
     margin: 20px;
 }
+.profile__info {
+    display: flex;
+   align-items: center;
+   margin-left: 500px;
+   margin-top: 60px;
+}
+.profile-icon {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #b0aeae;
+    cursor: pointer;
+}
+.profile-name {
+    font-size: 30px;
+    margin-left: 100px;
+}
 .toppage-list {
     font-size: 20px;
     display: flex;
@@ -49,5 +67,7 @@
     cursor: pointer;
     font-size: 15px;
     font-weight: 600;
-    margin-left: 1200px;
+    margin-left: 1100px;
+    margin-top: 5px;
+  
 }

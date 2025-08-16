@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ExhibitionRequest;
+use App\Http\Requests\CommentRequest;
 use App\Models\Item;
+use App\Models\Profile;
 use App\Models\Comment;
 use App\Models\Condition;
 use App\Models\Category;
@@ -15,6 +17,7 @@ class ItemController extends Controller
 {
     public function list()
     {
+
         $items = Item::orderBy('created_at', 'desc')->Paginate(8);
         return view('item.index', compact('items'));
     }
@@ -31,7 +34,7 @@ class ItemController extends Controller
     }
     public function detail($id)
     {
-        $item = Item::with(['condition', 'categories', 'category'])->withCount('comments')->findOrFail($id);
+        $item = Item::with(['condition', 'categories', 'category'])->withCount('comments', 'likedUsers')->findOrFail($id);
         return view('item.detail', compact('item'));
     }
     public function like(Item $item)
@@ -61,7 +64,7 @@ class ItemController extends Controller
         return view('items.index', compact('items'));
     }
 
-    public function commentStore(Request $request, Item $item)
+    public function commentStore(CommentRequest $request, Item $item)
     {
         $comment = new Comment();
         $comment->content = $request->content;
@@ -88,7 +91,7 @@ class ItemController extends Controller
 
 
         $item = Item::create([
-            'name' => $request->name,        
+            'name' => $request->name,
             'condition_id' => $request->condition_id,
             'brand_name' => $request->brand_name,
             'description' => $request->description,
@@ -96,40 +99,38 @@ class ItemController extends Controller
             'image' => $imagePath,
             'user_id' => Auth::id()
         ]);
-      
 
-        
         $item->categories()->sync($request->category_ids ?? []);
-     
-        
 
-        return view('item.sell', compact('imagePath', 'item', 'conditions', 'categories'));
+        return redirect('/');
     }
 
 
     public function  profileSell(Request $request)
     {
-        $user = Auth::user();
+        $user = auth()->user();
+        $profile = Profile::where('user_id', $user->id)->first();
         $listedItems  = Item::where('user_id', $user->id)->latest()->paginate(8);
-        return view('item.profilesell', compact('user', 'listedItems'));
+        return view('item.profilesell', compact('user', 'listedItems', 'profile'));
     }
     public function  profileBuy(Request $request)
     {
+   
         return view('item.profilesbuy',);
     }
 
     public function search(Request $request)
     {
-        $keyword = $request->input('keyword'); 
-        
+
         $query = Item::query();
 
         if ($request->keyword) {
             $query = $query->where('name', 'LIKE', "%{$request->keyword}%");
         }
 
-        $items = $query->orderBy('created_at', 'desc')->get();
 
-        return view('item.index', compact('items'));
+        $items = $query->orderBy('created_at', 'desc')->paginate(8);
+        $favoriteItems = $query->orderBy('created_at', 'desc')->paginate(8);
+        return view('item.index', compact('items', 'favoriteItems'));
     }
 }
