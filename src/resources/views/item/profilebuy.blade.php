@@ -6,18 +6,13 @@
 
 @section('content')
 <div class="content">
-    <div class="profilebuy__image">
+    <div class="profile__info">
         <img src=" {{ isset($profile['image']) ? asset('storage/' . $profile['image']) : asset('default.png') }}" alt="アイコン画像"
             class="profile-icon">
-        <label for="image" class="file-button">画像を選択する</label>
-        <input type="file" id="image" name="image" class="file-input">
-
-        <div class="product-card">
-            <img src="{{ '/storage/' . $profile['image'] }}" alt=" 商品画像" class="product-image">
-        </div>
-
+        <p class="profile-name">{{ $profile->name }}</p>
 
     </div>
+
     <form class="profile-form" action="/mypage/profile/{{ auth()->user()->id }}" method="get" novalidate>
         @csrf
         <input class="profile-form__btn" type="submit" value="プロフィールを編集">

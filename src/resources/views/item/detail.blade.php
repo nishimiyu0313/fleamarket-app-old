@@ -61,13 +61,14 @@
         <div class="comment-section">
             <h2 class="comment-heading">コメント({{ $item->comments_count }})</h2>
             @foreach($item->comments as $comment)
-
+            @if ($profile)
             <div class="comment-list">
 
                 <div class="comment-item">
                     <div class="comment-user">
-                        <img src="" class="user-icon">
-                        <span class="user-name"></span>
+                        <img src=" {{ isset($profile['image']) ? asset('storage/' . $profile['image']) : asset('default.png') }}" alt="アイコン画像"
+                            class="profile-icon">
+                        <p class="profile-name">{{ $profile->name }}</p>
                     </div>
                     <div class="comment-view">
                         <p class="comment-content">{{ $comment->content }}</p>
@@ -75,6 +76,7 @@
                 </div>
 
             </div>
+            @endif
             @endforeach
         </div>
 

@@ -9,6 +9,9 @@ class Payment extends Model
 {
     use HasFactory;
 
+    const STATUS_ADDRESS_PENDING = 'address_pending';
+    const STATUS_COMPLETED = 'completed';
+
     protected $fillable = [
         'user_id',
         'item_id',
@@ -16,11 +19,16 @@ class Payment extends Model
         'postal_code',
         'address',
         'building',
+        'status',
 
     ];
 
     public function items()
     {
         return $this->belongsTo(Item::class);
+    }
+    public function isCompleted()
+    {
+        return $this->status === self::STATUS_COMPLETED;
     }
 }

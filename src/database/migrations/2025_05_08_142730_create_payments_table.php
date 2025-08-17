@@ -21,6 +21,7 @@ class CreatePaymentsTable extends Migration
             $table->string('postal_code');
             $table->string('address');
             $table->string('building');
+            $table->string('status')->default('address_pending');
             $table->timestamps();
         });
     }

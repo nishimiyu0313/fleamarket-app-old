@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<form class="purchase-form" action="{{ url('/purchase/' . $item->id) }}" method="post" novalidate>
+<form class="purchase-form" action="{{ '/purchase/' . $item->id }}" method="post" novalidate>
     @csrf
     <div class="purchase">
 
@@ -33,7 +33,7 @@
                 </div>
 
                 @error('content')
-                {{ $message }}
+                <p class="error-message" style="color:red">{{ $message }}</p>
                 @enderror
 
 
@@ -47,6 +47,10 @@
                     <p>郵便番号：{{ $profile->postal_code }}</p>
                     <p>住所：{{ $profile->address }}</p>
                     <p>建物名：{{ $profile->building }}</p>
+
+                    <input type="hidden" name="postal_code" value="{{ $profile->postal_code }}">
+                    <input type="hidden" name="address" value="{{ $profile->address }}">
+                    <input type="hidden" name="building" value="{{ $profile->building }}">
                     @else
                     <p>プロフィール情報がありません。</p>
                     @endif

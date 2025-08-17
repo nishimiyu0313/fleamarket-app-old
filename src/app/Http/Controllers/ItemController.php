@@ -34,8 +34,14 @@ class ItemController extends Controller
     }
     public function detail($id)
     {
-        $item = Item::with(['condition', 'categories', 'category'])->withCount('comments', 'likedUsers')->findOrFail($id);
-        return view('item.detail', compact('item'));
+        $user = auth()->user();
+        $profile = null;
+        if ($user) {
+            $profile = Profile::where('user_id', $user->id)->first();
+        }
+
+        $item = Item::with(['condition', 'categories', 'category', 'comments.user.profile'])->withCount('comments', 'likedUsers')->findOrFail($id);
+        return view('item.detail', compact('item', 'user', 'profile'));
     }
     public function like(Item $item)
     {
@@ -115,22 +121,36 @@ class ItemController extends Controller
     }
     public function  profileBuy(Request $request)
     {
-   
-        return view('item.profilesbuy',);
+        $user = auth()->user();
+        $profile = Profile::where('user_id', $user->id)->first();
+        return view('item.profilebuy', compact('user', 'profile'));
     }
 
     public function search(Request $request)
     {
+        $keyword = $request->keyword;
+        $user = Auth::user();
 
-        $query = Item::query();
+        // 全体の商品検索（おすすめ）
+        $items = Item::when($keyword, function ($query) use ($keyword) {
+            $query->where('name', 'LIKE', "%{$keyword}%");
+        })
+            ->orderBy('created_at', 'desc')
+            ->paginate(8);
 
-        if ($request->keyword) {
-            $query = $query->where('name', 'LIKE', "%{$request->keyword}%");
+        /** @var \App\Models\User $user */
+        $favoriteItems = collect();
+        if ($user) {
+            $favoriteItems = $user->likedItems()
+                ->when($keyword, function ($query) use ($keyword) {
+                    $query->where('name', 'LIKE', "%{$keyword}%");
+                })
+                ->orderBy('pivot_created_at', 'desc')
+                ->paginate(8);
+            
         }
 
-
-        $items = $query->orderBy('created_at', 'desc')->paginate(8);
-        $favoriteItems = $query->orderBy('created_at', 'desc')->paginate(8);
-        return view('item.index', compact('items', 'favoriteItems'));
+        
+        return view('item.index', compact('items', 'favoriteItems', 'keyword'));
     }
 }
