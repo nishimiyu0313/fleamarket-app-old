@@ -30,6 +30,7 @@
                         <option value="{{ $payment->content }}">{{ $payment->content }}</option>
                         @endforeach
                     </select>
+                    
                 </div>
 
                 @error('content')

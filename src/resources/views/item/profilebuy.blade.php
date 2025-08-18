@@ -25,5 +25,23 @@
             <h3>購入した商品</h3>
         </div>
     </div>
+    <div class="products-form">
+        <div class="products-row">
+            @foreach ($purchasedItems as $payment)
+            @if ($payment->item)
+            <div class="products-card">
+                <a href="/item/{{ $payment->item->id }}">
+                    <img src="{{ '/storage/' . $payment->item->image }}" alt=" 商品画像" class="products-image">
+                </a>
+                <div class="item-name">{{ $payment->item->name }}</div>
+
+            </div>
+            @endif
+            @endforeach
+        </div>
+        <div class="pagination">
+            {{ $purchasedItems->links('vendor.pagination.semantic-ui') }}
+        </div>
+    </div>
 </div>
 @endsection

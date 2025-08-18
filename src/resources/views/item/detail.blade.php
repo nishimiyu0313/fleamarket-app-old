@@ -39,10 +39,12 @@
             </div>
 
         </div>
-        <form class="purchase-form" action="/purchase/{{ $item['id'] }}" method="post" novalidate>
+        
+        <form class="purchase-form" action="/purchase/{{ $item['id'] }}" method="get" novalidate>
             @csrf
             <input class="purchase_btn " type="submit" value="購入手続きへ">
         </form>
+        
         <div class="product-description">
             <h3>商品説明</h3>
             <p>{{ $item->description }}</p>
@@ -61,14 +63,14 @@
         <div class="comment-section">
             <h2 class="comment-heading">コメント({{ $item->comments_count }})</h2>
             @foreach($item->comments as $comment)
-            @if ($profile)
+            @if ($comment->user && $comment->user->profile)
             <div class="comment-list">
 
                 <div class="comment-item">
                     <div class="comment-user">
-                        <img src=" {{ isset($profile['image']) ? asset('storage/' . $profile['image']) : asset('default.png') }}" alt="アイコン画像"
+                        <img src=" {{ $comment->user->profile->image ? asset('storage/' . $comment->user->profile->image) : asset('default.png') }}" alt="アイコン画像"
                             class="profile-icon">
-                        <p class="profile-name">{{ $profile->name }}</p>
+                        <p class="profile-name">{{ $comment->user->profile->name }}</p>
                     </div>
                     <div class="comment-view">
                         <p class="comment-content">{{ $comment->content }}</p>

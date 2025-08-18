@@ -31,4 +31,8 @@ class Payment extends Model
     {
         return $this->status === self::STATUS_COMPLETED;
     }
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
 }

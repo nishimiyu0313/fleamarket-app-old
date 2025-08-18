@@ -10,6 +10,7 @@ use App\Models\Profile;
 use App\Models\Comment;
 use App\Models\Condition;
 use App\Models\Category;
+use App\Models\Payment;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -40,7 +41,15 @@ class ItemController extends Controller
             $profile = Profile::where('user_id', $user->id)->first();
         }
 
-        $item = Item::with(['condition', 'categories', 'category', 'comments.user.profile'])->withCount('comments', 'likedUsers')->findOrFail($id);
+        $item = Item::with([
+            'condition',
+            'categories',
+            'category',
+            'comments' => function ($query) {
+                $query->latest();
+            },
+            'comments.user.profile'
+        ])->withCount('comments', 'likedUsers')->findOrFail($id);
         return view('item.detail', compact('item', 'user', 'profile'));
     }
     public function like(Item $item)
@@ -78,7 +87,7 @@ class ItemController extends Controller
         $comment->item_id = $item->id;
         $comment->save();
 
-        return back()->with('success', 'コメントを投稿しました');
+        return back();
     }
     public function index()
     {
@@ -123,7 +132,13 @@ class ItemController extends Controller
     {
         $user = auth()->user();
         $profile = Profile::where('user_id', $user->id)->first();
-        return view('item.profilebuy', compact('user', 'profile'));
+        $purchasedItems = Payment::where('user_id', $user->id)
+            ->where('status', Payment::STATUS_COMPLETED) // 購入完了のみ
+            ->with('item') // itemとのリレーションが必要
+            ->latest() // created_at の降順
+            ->paginate(8);
+
+        return view('item.profilebuy', compact('user', 'profile', 'purchasedItems'));
     }
 
     public function search(Request $request)
@@ -147,10 +162,9 @@ class ItemController extends Controller
                 })
                 ->orderBy('pivot_created_at', 'desc')
                 ->paginate(8);
-            
         }
 
-        
+
         return view('item.index', compact('items', 'favoriteItems', 'keyword'));
     }
 }

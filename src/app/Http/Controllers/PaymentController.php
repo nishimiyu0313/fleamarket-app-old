@@ -13,20 +13,29 @@ class PaymentController extends Controller
 {
     public function  index($id)
     {
-        
-        $item = Item::find($id);
+
+        $item = Item::find($id); 
         $user = Auth::user();
+        if (!$user) {
+            // ログインしてなければリダイレクト（または例外）
+            return redirect()->route('login');
+        }
+       
         $profile = $user->profile;
         $payments = Payment::select('content')->distinct()->get();
         return view('payment.purchase', compact('item', 'user', 'payments', 'profile'));
     }
     public  function payment(Request $request, $item_id)
     {
-       
         //dd($request->all());
+        $request->validate([
+            'content' => 'required|string',
+        ]);
 
         $user = Auth::user();
         $profile = $user->profile;
+
+       
 
         $postal_code = $request->postal_code ?? $profile->postal_code;
         $address = $request->address ?? $profile->address;

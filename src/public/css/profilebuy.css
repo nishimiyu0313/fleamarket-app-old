@@ -35,6 +35,22 @@
     color: rgb(250, 5, 5);
     margin-left: 80px;
 }
+.products-row {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+.products-card {
+    padding: 15px;
+    text-align: center;
+    margin: 10px;
+}
+.products-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
 .profile-form__btn {
  width: 200px;
     height: 40px;
