@@ -143,28 +143,30 @@ class ItemController extends Controller
 
     public function search(Request $request)
     {
-        $keyword = $request->keyword;
-        $user = Auth::user();
+        $keyword = $request->input('keyword');
+        $type   = $request->input('type', '/');
 
-        // 全体の商品検索（おすすめ）
-        $items = Item::when($keyword, function ($query) use ($keyword) {
-            $query->where('name', 'LIKE', "%{$keyword}%");
-        })
-            ->orderBy('created_at', 'desc')
-            ->paginate(8);
-
-        /** @var \App\Models\User $user */
+        if ($type === '/') {
+            $query = Item::orderBy('created_at', 'desc');
+        } elseif ($type === 'mylist') {
+            $query = Item::whereHas('likedUsers', function ($q) {
+                $q->where('user_id', auth()->id());
+            });
+        } else {
+            abort(404);
+        }
+        if ($request->filled('keyword')) {
+            $query->where('name', 'like', '%' . $request->keyword . '%');
+        }
         $favoriteItems = collect();
-        if ($user) {
-            $favoriteItems = $user->likedItems()
-                ->when($keyword, function ($query) use ($keyword) {
-                    $query->where('name', 'LIKE', "%{$keyword}%");
-                })
-                ->orderBy('pivot_created_at', 'desc')
-                ->paginate(8);
+
+        if ($type === 'mylist') {
+            // ユーザーのいいねアイテムを取得（$queryはすでに絞り込んでいるのでgetだけ）
+            $favoriteItems = $query->paginate(8)->appends($request->all());
         }
 
-
-        return view('item.index', compact('items', 'favoriteItems', 'keyword'));
+        $items = $query->paginate(8)->appends($request->all());
+        $view = $type === '/' ? 'item/index' : 'item.mylist';
+        return view($view, compact('items', 'keyword', 'favoriteItems'));
     }
 }

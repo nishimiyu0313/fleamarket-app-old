@@ -82,8 +82,8 @@ class ProfileController extends Controller
             'postal_code',
             'address',
             'building',
-            'content',
         ]);
+        $address['content'] = $request->input('content', '未指定の支払い方法');
         $address['user_id'] = $user->id;
         $address['item_id'] = $id;
        
@@ -95,6 +95,6 @@ class ProfileController extends Controller
         
 
         $payment = Payment::create($address);
-        return view('payment.address', compact('item', 'profile', 'payment'));
+        return redirect('/purchase/' . $id);
     }
 }

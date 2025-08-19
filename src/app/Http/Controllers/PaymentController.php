@@ -35,13 +35,9 @@ class PaymentController extends Controller
         $user = Auth::user();
         $profile = $user->profile;
 
-       
-
         $postal_code = $request->postal_code ?? $profile->postal_code;
         $address = $request->address ?? $profile->address;
         $building = $request->building ?? $profile->building;
-
-       
 
         $payment = Payment::where('user_id', $user->id)
             ->where('item_id',  $item_id)
@@ -51,8 +47,7 @@ class PaymentController extends Controller
         $payment->status = Payment::STATUS_COMPLETED;
         $payment->save();
     } else {
-            
-        
+                    
         Payment::create([
             'user_id' => Auth::id(),
             'item_id' => $item_id,

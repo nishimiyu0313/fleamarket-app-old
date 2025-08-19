@@ -15,21 +15,23 @@
         <p class="product-price">￥{{ $item->price }}（税込）</p>
 
         <div class="product-icon">
-            @if (Auth::check() && $item->likedUsers->contains(Auth::user()))
-            <form method="POST" action="/item/{{ $item['id'] }}/unlike" novalidate>
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="unlike-submit">★</button>
-            </form>
-            @else
-            <form method="POST" action="/item/{{ $item['id'] }}/like" novalidate>
-                @csrf
-                <button type="submit" class="like-submit">☆</button>
-            </form>
+            <div class="like-container">
+                @if (Auth::check() && $item->likedUsers->contains(Auth::user()))
+                <form method="POST" action="/item/{{ $item['id'] }}/unlike" novalidate>
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="unlike-submit">★</button>
+                </form>
+                @else
+                <form method="POST" action="/item/{{ $item['id'] }}/like" novalidate>
+                    @csrf
+                    <button type="submit" class="like-submit">☆</button>
+                </form>
 
-            @endif
-            <div class="like-count">
-                {{ $item->liked_users_count }}
+                @endif
+                <div class="like-count">
+                    {{ $item->liked_users_count }}
+                </div>
             </div>
 
 
@@ -39,12 +41,12 @@
             </div>
 
         </div>
-        
+
         <form class="purchase-form" action="/purchase/{{ $item['id'] }}" method="get" novalidate>
             @csrf
             <input class="purchase_btn " type="submit" value="購入手続きへ">
         </form>
-        
+
         <div class="product-description">
             <h3>商品説明</h3>
             <p>{{ $item->description }}</p>

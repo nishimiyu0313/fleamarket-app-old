@@ -16,7 +16,8 @@
             <a class="header__heading" href="/">COACHTECH</a>
             <form class="search-form" action="/product/search" method="get">
                 @csrf
-                <input class="search-form__keyword-input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}" novalidate>
+                <input class="search-form__keyword-input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{request('keyword')}}">
+                <input type="hidden" name="type" value="{{ request()->is('mylist*') ? 'mylist' : '/' }}">
             </form>
             <ul class="header-nav">
                 <li class="header-nav__item">
