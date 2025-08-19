@@ -22,6 +22,9 @@
                     <img src="{{ '/storage/' . $item['image'] }}" alt=" 商品画像" class="products-image">
                 </a>
                 <div class="item-name">{{ $item->name }}</div>
+                @if ($item->is_sold)
+                <p class="sold-label" style="color: red; font-weight: bold;">Sold</p>
+                @endif
 
             </div>
             @endforeach

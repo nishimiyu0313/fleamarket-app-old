@@ -5,6 +5,11 @@
 @endsection
 
 @section('content')
+@if ($errors->has('msg'))
+<div class="alert alert-danger">
+    {{ $errors->first('msg') }}
+</div>
+@endif
 <form class="purchase-form" action="{{ '/purchase/' . $item->id }}" method="post" novalidate>
     @csrf
     <div class="purchase">
@@ -30,7 +35,7 @@
                         <option value="{{ $payment->content }}">{{ $payment->content }}</option>
                         @endforeach
                     </select>
-                    
+
                 </div>
 
                 @error('content')
@@ -40,18 +45,26 @@
 
             </div>
 
+            @php
+            $payment = \App\Models\Payment::where('user_id', Auth::id())
+            ->where('item_id', $item->id)
+            ->first();
 
+            $postal_code = $payment->postal_code ?? $profile->postal_code;
+            $address = $payment->address ?? $profile->address;
+            $building = $payment->building ?? $profile->building;
+            @endphp
             <div class="address">
                 <h3>配送先</h3>
                 <div class="address-display">
-                    @if ($profile)
-                    <p>郵便番号：{{ $profile->postal_code }}</p>
-                    <p>住所：{{ $profile->address }}</p>
-                    <p>建物名：{{ $profile->building }}</p>
+                    @if ($postal_code && $address)
+                    <p>郵便番号：{{ $postal_code }}</p>
+                    <p>住所：{{ $address }}</p>
+                    <p>建物名：{{ $building }}</p>
 
-                    <input type="hidden" name="postal_code" value="{{ $profile->postal_code }}">
-                    <input type="hidden" name="address" value="{{ $profile->address }}">
-                    <input type="hidden" name="building" value="{{ $profile->building }}">
+                    <input type="hidden" name="postal_code" value="{{ $postal_code }}">
+                    <input type="hidden" name="address" value="{{ $address }}">
+                    <input type="hidden" name="building" value="{{ $building }}">
                     @else
                     <p>プロフィール情報がありません。</p>
                     @endif
@@ -63,7 +76,7 @@
         </div>
         <div class="product-confirm">
             <div class="product-edit">
-                <p class="charge"><strong>商品代金</strong></p>
+                <p class="charge"><strong>商品代金</strong>¥{{ number_format($item->price) }}</p>
                 <p class="pay"><strong>支払い方法</strong></p>
             </div>
 

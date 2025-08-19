@@ -25,39 +25,51 @@ class PaymentController extends Controller
         $payments = Payment::select('content')->distinct()->get();
         return view('payment.purchase', compact('item', 'user', 'payments', 'profile'));
     }
-    public  function payment(Request $request, $item_id)
+    public function payment(Request $request, $item_id)
     {
-        //dd($request->all());
+        $item = Item::find($item_id);
+
+        // 商品がすでに売れてたら購入処理を止める
+        if ($item && $item->sold) {
+            return redirect()->back()->withErrors(['msg' => 'この商品は既に購入済みです。']);
+        }
         $request->validate([
             'content' => 'required|string',
         ]);
 
         $user = Auth::user();
-        $profile = $user->profile;
 
-        $postal_code = $request->postal_code ?? $profile->postal_code;
-        $address = $request->address ?? $profile->address;
-        $building = $request->building ?? $profile->building;
-
+        // 一時保存されている payment を取得
         $payment = Payment::where('user_id', $user->id)
-            ->where('item_id',  $item_id)
+            ->where('item_id', $item_id)
             ->first();
 
-             if ($payment) {
-        $payment->status = Payment::STATUS_COMPLETED;
-        $payment->save();
-    } else {
-                    
-        Payment::create([
-            'user_id' => Auth::id(),
-            'item_id' => $item_id,
-           'content' => $request->content,
-            'postal_code' => $postal_code,
-            'address' => $address,
-            'building' => $building,
-            'status' => Payment::STATUS_COMPLETED,
-        ]);       
+        // Payment が存在すれば更新
+        if ($payment) {
+            $payment->update([
+                'content' => $request->content,
+                'status' => Payment::STATUS_COMPLETED,
+            ]);
+        } else {
+            // 存在しない場合、プロフィール住所を使用して新規作成
+            $profile = $user->profile;
+
+            Payment::create([
+                'user_id'     => $user->id,
+                'item_id'     => $item_id,
+                'content'     => $request->content,
+                'postal_code' => $profile->postal_code,
+                'address'     => $profile->address,
+                'building'    => $profile->building,
+                'status'      => Payment::STATUS_COMPLETED,
+            ]);
+        }
+        $item = Item::find($item_id);
+        if ($item) {
+            $item->is_sold = true;
+            $item->save();
+        }
+
+        return redirect('/');
     }
-    return redirect('/');
-}
 }

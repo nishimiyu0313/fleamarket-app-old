@@ -71,30 +71,36 @@ class ProfileController extends Controller
         $profile = Auth::user()->profile;
         return view('payment.address', compact('profile', 'item'));
     }
-    public function  updateAddress(Request $request, $id)
+
+    public function updateAddress(Request $request, $item_id)
     {
-        $user = Auth::user();
-        $profile = $user->profile;
-        $item = Item::find($id);
+    $user = Auth::user();
 
+    // 入力された配送先をバリデーション
+    $request->validate([
+        'postal_code' => 'required|string',
+        'address' => 'required|string',
+        'building' => 'nullable|string',
+    ]);
 
-        $address = $request->only([
-            'postal_code',
-            'address',
-            'building',
-        ]);
-        $address['content'] = $request->input('content', '未指定の支払い方法');
-        $address['user_id'] = $user->id;
-        $address['item_id'] = $id;
-       
+    // 該当の Payment レコードがあれば更新、なければ作成（住所だけ一時保存）
+    $payment = Payment::firstOrNew([
+        'user_id' => $user->id,
+        'item_id' => $item_id,
+    ]);
 
-        $lastPayment = Payment::where('user_id', $user->id)
-            ->where('item_id', $id)
-            ->latest()
-            ->first();
-        
+    $payment->postal_code = $request->postal_code;
+    $payment->address = $request->address;
+    $payment->building = $request->building;
+    $payment->status = Payment::STATUS_ADDRESS_PENDING;
 
-        $payment = Payment::create($address);
-        return redirect('/purchase/' . $id);
+    if (is_null($payment->content)) {
+        $payment->content = '';  // content が null なら空文字で埋める
     }
-}
+
+    $payment->save();
+
+    return redirect("/purchase/{$item_id}");
+}    }
+
+
