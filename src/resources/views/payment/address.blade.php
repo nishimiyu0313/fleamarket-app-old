@@ -22,7 +22,9 @@
 
                     </div>
                     <div class="form__error">
-
+                        @error('postal_code')
+                        {{ $message }}
+                        @enderror
                     </div>
                 </div>
             </div>
@@ -36,6 +38,9 @@
 
                     </div>
                     <div class="form__error">
+                        @error('address')
+                        {{ $message }}
+                        @enderror
 
                     </div>
                 </div>

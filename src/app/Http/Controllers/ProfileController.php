@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\AddressRequest;
 use App\Models\Profile;
 use App\Models\Payment;
 use App\Models\Item;
+use Faker\Provider\ar_EG\Address;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -72,7 +74,7 @@ class ProfileController extends Controller
         return view('payment.address', compact('profile', 'item'));
     }
 
-    public function updateAddress(Request $request, $item_id)
+    public function updateAddress(AddressRequest $request, $item_id)
     {
     $user = Auth::user();
 

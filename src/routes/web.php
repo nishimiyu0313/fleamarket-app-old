@@ -19,12 +19,12 @@ use App\Http\Controllers\PaymentController;
 */
 
 Route::get('/', [ItemController::class, 'list']);
-Route::get('/item/{item_id}', [ItemController::class, 'detail']);
+
 
 
 Route::middleware('auth')->group(function () {
     Route::get('/mylist', [ItemController::class, 'mylist']);
-    Route::get('/product/search', [ItemController::class, 'search']);
+    Route::get('/item/search', [ItemController::class, 'search']);
     Route::post('/item/{item}/like', [ItemController::class, 'like']);
     Route::delete('/item/{item}/unlike', [ItemController::class, 'unlike']);
     Route::get('/items/liked', [ItemController::class, 'likedItems']);
@@ -47,3 +47,4 @@ Route::middleware('auth')->group(function () {
     Route::get('/purchase/address/{item_id}', [ProfileController::class, 'address']);
     Route::post('/purchase/address/{item_id}', [ProfileController::class, 'updateAddress']);
 });
+Route::get('/item/{item_id}', [ItemController::class, 'detail']);

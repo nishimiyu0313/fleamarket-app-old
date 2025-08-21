@@ -22,7 +22,7 @@
 }
 .form__label--item {
     font-size: 25px;
- font-weight: 500;
+    font-weight: 500;
 }
 
 .address {
@@ -34,9 +34,9 @@
     height: 40px;
     border: 1px solid #0a0a0a;
     border-radius: 3px;
-  
+
     appearance: none;
-  }
+}
 
 .profile-form__btn {
     padding: 10px;
@@ -50,4 +50,10 @@
     font-size: 25px;
     font-weight: 600;
     margin-top: 60px;
+}
+.form__error {
+    margin-top: 2px;
+    height: 20px;
+    color: #ff0000;
+    text-align: left;
 }

@@ -39,6 +39,11 @@
                     </label>
                     @endforeach
                 </div>
+                <div class="register-form__error-message">
+                    @error('category')
+                    {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="form__group">
                 <div class="form__group-title">
@@ -51,6 +56,11 @@
                         <option value="{{ $condition->id }}">{{ $condition->content }}</option>
                         @endforeach
                     </select>
+                </div>
+                <div class="register-form__error-message">
+                    @error('condition')
+                    {{ $message }}
+                    @enderror
                 </div>
             </div>
 
@@ -79,9 +89,7 @@
                     <input class="sell-form__input contact-form__name-input" type="text" name="brand_name" id="brand_name"
                         value="{{ old('brand_name') }}">
                 </div>
-                <div class="register-form__error-message">
-
-                </div>
+               
             </div>
             <div class="form__group">
                 <div class="form__group-title">

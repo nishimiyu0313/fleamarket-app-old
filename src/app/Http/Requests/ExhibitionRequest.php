@@ -28,6 +28,9 @@ class ExhibitionRequest extends FormRequest
             'description' => ['required', 'max:255'],
             'image' => ['required', 'mimes:jpeg,png'],
             'price' =>['required','numeric','min:0'],
+            'category' => ['required'],
+            'condition' => ['required']
+
         ];
     }
     public function messages()
@@ -40,7 +43,11 @@ class ExhibitionRequest extends FormRequest
             'image.mimes:jpeg,png' => '拡張子を.jpegもしくは.pngで登録してください',
             'price.required' => '値段を入力してください',
             'price.numeric' => '数値で入力してください',
-            'price.min:0' => '0円以上で入力してください'
+            'price.min:0' => '0円以上で入力してください',
+            'category.required' => 'カテゴリーを選択してください',
+            'condition.required' => '商品の状態を選択してください'
+
+
         ];
 }
 }

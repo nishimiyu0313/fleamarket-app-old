@@ -70,4 +70,10 @@ font-weight: bold;
     border: 2px solid #b0aeae;
     cursor: pointer;
 }
+.form__error {
+    margin-top: 2px;
+    height: 20px;
+    color: #ff0000;
+    text-align: left;
+}
 

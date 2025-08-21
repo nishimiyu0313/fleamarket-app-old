@@ -68,6 +68,9 @@
                     @else
                     <p>プロフィール情報がありません。</p>
                     @endif
+                    @error('address')
+                    <p class="error-message" style="color:red">{{ $message }}</p>
+                    @enderror
 
 
                 </div>

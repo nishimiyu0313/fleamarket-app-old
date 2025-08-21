@@ -56,10 +56,13 @@
 .product-edit p {
     font-size: 20px;
     padding-left: 30px;
+     
 }
+
 .product-edit .charge {
     font-size: 1.3rem;
     margin-bottom: 10px;
+    letter-spacing: 0.1em;
 }
 .charge {
     padding-bottom: 30px;

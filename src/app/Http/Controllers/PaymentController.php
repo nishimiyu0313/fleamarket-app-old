@@ -25,7 +25,7 @@ class PaymentController extends Controller
         $payments = Payment::select('content')->distinct()->get();
         return view('payment.purchase', compact('item', 'user', 'payments', 'profile'));
     }
-    public function payment(Request $request, $item_id)
+    public function payment(PurchaseRequest $request, $item_id)
     {
         $item = Item::find($item_id);
 

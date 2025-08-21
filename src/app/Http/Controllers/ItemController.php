@@ -18,8 +18,10 @@ class ItemController extends Controller
 {
     public function list()
     {
+        $userId = auth()->id();
 
-        $items = Item::orderBy('created_at', 'desc')->Paginate(8);
+        $items = Item::where('user_id', '!=', $userId)
+        ->orderBy('created_at', 'desc')->Paginate(8);
         return view('item.index', compact('items'));
     }
     public function mylist()
