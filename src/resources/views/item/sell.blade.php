@@ -33,8 +33,8 @@
                 </div>
                 <div class="category-list">
                     @foreach ($categories as $category)
-                    <input type="checkbox" name="category_ids[]" value=" {{ $category->id }}" id="category" required>
-                    <label class="category-option" for="category">
+                    <input type="checkbox" name="category_ids[]" value=" {{ $category->id }}" id="category_{{ $category->id }}" required>
+                    <label class="category-option" for="category_{{ $category->id }}">
                         {{ $category->content }}
                     </label>
                     @endforeach
@@ -89,7 +89,7 @@
                     <input class="sell-form__input contact-form__name-input" type="text" name="brand_name" id="brand_name"
                         value="{{ old('brand_name') }}">
                 </div>
-               
+
             </div>
             <div class="form__group">
                 <div class="form__group-title">

@@ -17,7 +17,7 @@ class PaymentController extends Controller
         $item = Item::find($id); 
         $user = Auth::user();
         if (!$user) {
-            // ログインしてなければリダイレクト（または例外）
+            
             return redirect()->route('login');
         }
        
@@ -29,7 +29,7 @@ class PaymentController extends Controller
     {
         $item = Item::find($item_id);
 
-        // 商品がすでに売れてたら購入処理を止める
+        
         if ($item && $item->sold) {
             return redirect()->back()->withErrors(['msg' => 'この商品は既に購入済みです。']);
         }
@@ -39,19 +39,18 @@ class PaymentController extends Controller
 
         $user = Auth::user();
 
-        // 一時保存されている payment を取得
         $payment = Payment::where('user_id', $user->id)
             ->where('item_id', $item_id)
             ->first();
 
-        // Payment が存在すれば更新
+        
         if ($payment) {
             $payment->update([
                 'content' => $request->content,
                 'status' => Payment::STATUS_COMPLETED,
             ]);
         } else {
-            // 存在しない場合、プロフィール住所を使用して新規作成
+           
             $profile = $user->profile;
 
             Payment::create([

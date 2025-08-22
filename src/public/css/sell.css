@@ -96,3 +96,52 @@
     color: #ff0000;
     text-align: left;
 }
+.category-list {
+    display: flex;
+    flex-wrap: wrap; /* 折り返し対応 */
+    gap: 10px; /* チェックボックス間の隙間 */
+}
+
+.category-list input {
+    display: none;
+}
+
+.category-list .category-option {
+    display: flex;
+    align-items: center;
+    border: 1px solid red; /* 赤い枠線 */
+    background-color: white; /* 背景白 */
+    color: red; /* 文字赤 */
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+     /* ラベルのテキストの折り返し防止 */
+}
+
+.category-list input[type="checkbox"]:checked + .category-option {
+    background-color: red;
+    color: white;
+}
+.contact-form__select {
+    appearance: none;
+    background-color: white;      /* 初期状態は白 */
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.contact-form__select:focus {
+    background-color: #d1d1d1;    /* 開かれているとき（フォーカス時）はグレーに */
+    outline: none;
+}
+
+/* Firefox では option の hover を変更可能 */
+.contact-form__select option:hover {
+    background-color: #5d64ea; /* 葉青色 (薄緑) */
+    color: white;
+}

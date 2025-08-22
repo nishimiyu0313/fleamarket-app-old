@@ -100,7 +100,7 @@ class ItemController extends Controller
 
         return view('item.sell', compact('conditions', 'categories', 'items'));
     }
-    public function sell(ExhibitionRequest $request)
+    public function sell(Request $request)
     {
         $imagePath = $request->image->store('images', 'public');
         $conditions = Condition::all();
