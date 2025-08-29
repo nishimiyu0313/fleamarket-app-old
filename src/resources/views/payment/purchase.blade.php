@@ -31,9 +31,10 @@
                 <div class="purchase-form__select-inner">
                     <select class="purchase-form__select" name="content" id="content" required>
                         <option value="" disabled selected>選択してください</option>
-                        @foreach($payments as $payment)
-                        <option value="{{ $payment->content }}">{{ $payment->content }}</option>
-                        @endforeach
+
+                        <option value="カード払い">カード払い</option>
+                        <option value="コンビニ払い">コンビニ払い</option>
+
                     </select>
 
                 </div>
@@ -71,8 +72,6 @@
                     @error('address')
                     <p class="error-message" style="color:red">{{ $message }}</p>
                     @enderror
-
-
                 </div>
                 <a href="/purchase/address/{{ $item['id'] }}" class="btn-address">変更する</a>
             </div>
@@ -81,6 +80,7 @@
             <div class="product-edit">
                 <p class="charge"><strong>商品代金</strong>¥{{ number_format($item->price) }}</p>
                 <p class="pay"><strong>支払い方法</strong></p>
+
             </div>
 
 
@@ -88,7 +88,15 @@
 
         </div>
 
+        <script>
+            const selectElem = document.getElementById('content');
+            const payElem = document.querySelector('.pay');
 
+            selectElem.addEventListener('change', function() {
+                const selectedValue = this.value;
+                payElem.innerHTML = '<strong>支払い方法:</strong> ' + selectedValue;
+            });
+        </script>
     </div>
 </form>
 

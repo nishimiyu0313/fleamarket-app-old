@@ -145,3 +145,87 @@
     background-color: #5d64ea; /* 葉青色 (薄緑) */
     color: white;
 }
+
+@media screen and (min-width: 768px) and (max-width: 850px) {
+    .sell-form__content {
+    padding: 15px 10px;
+  }
+  .sell-form__heading {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+   .form {
+    width: 95%;
+    text-align: center;
+  }
+   .product-detail h2 {
+    font-size: 20px;
+    margin-left: 10px;
+  }
+
+  .form__group {
+    margin: 20px 0;
+  }
+
+  .form__group-title {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .form__label--item {
+    font-size: 18px;
+  }
+
+  .sell-form__input {
+    width: 90%;
+    font-size: 16px;
+  }
+
+  .file-button {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .sell-form__btn {
+    width: 90%;
+    font-size: 18px;
+    height: 50px;
+    margin-top: 30px;
+  }
+
+  .form__error,
+  .register-form__error-message {
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .custom-checkbox {
+    font-size: 14px;
+    justify-content: center;
+  }
+
+  .custom-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+  }
+
+  .category-list {
+    
+    align-items: center;
+  }
+
+  .category-list .category-option {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
+
+  .contact-form__select {
+    font-size: 14px;
+    width: 90%;
+  }
+}
+   
+   
+   
+   

@@ -3,9 +3,9 @@
 }
 .profile__info {
     display: flex;
-   align-items: center;
-   margin-left: 500px;
-   margin-top: 60px;
+    align-items: center;
+    margin-left: 500px;
+    margin-top: 60px;
 }
 .profile-icon {
     width: 150px;
@@ -25,7 +25,7 @@
     height: 47px;
     width: 1512px;
     top: 127px;
-} 
+}
 .listeditem {
     margin-left: 30px;
     color: rgb(250, 5, 5);
@@ -35,6 +35,7 @@
     color: black;
     text-decoration: none;
 }
+
 .products-row {
     margin-top: 50px;
     display: grid;
@@ -57,17 +58,51 @@
     margin-top: 20px;
 }
 .profile-form__btn {
-     width: 200px;
+    width: 200px;
     height: 40px;
     border: none;
     border-radius: 5px;
     color: #f84e4e;
     background-color: #fff;
-    border: 1px solid #f84e4e ;
+    border: 1px solid #f84e4e;
     cursor: pointer;
     font-size: 15px;
     font-weight: 600;
     margin-left: 1100px;
     margin-top: 5px;
-  
+}
+
+@media screen and (min-width: 768px) and (max-width: 850px) {
+    .products-row {
+        grid-template-columns: repeat(2, 1fr); /* タブレットは2列が見やすい */
+    }
+    .products-image {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+    .profile__info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 40px auto 0 auto;
+    }
+    .profile-icon {
+        width: 100px;
+        height: 100px;
+    }
+    .profile-name {
+        font-size: 24px;
+        margin-left: 0;
+        margin-top: 20px;
+        margin-left: 30px;
+    }
+    .profile-form__btn {
+        margin-left: 0;
+        margin: 30px auto 0 auto;
+        display: block;
+        width: 70%;
+        max-width: 300px;
+        font-size: 16px;
+    }
 }

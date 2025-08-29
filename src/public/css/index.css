@@ -5,7 +5,7 @@
     font-size: 20px;
     display: flex;
     height: 47px;
-    width: 1512px;
+    
     top: 127px;
 } 
 .recommend {
@@ -37,4 +37,22 @@
     display: flex;
     justify-content: center;
     margin-top: 20px;
+}
+
+@media screen and (min-width: 1400px) and (max-width: 1540px) {
+ .products-row {
+        grid-template-columns: repeat(4, 1fr); /* PC用のカラム数 */
+    }
+}
+
+
+
+
+@media screen and (min-width: 768px) and (max-width: 850px) {
+    .products-row {
+        grid-template-columns: repeat(2, 1fr); /* タブレットは2列が見やすい */
+    }
+   
+    
+    
 }

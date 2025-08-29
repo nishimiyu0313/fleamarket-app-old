@@ -57,7 +57,6 @@ class ProfileController extends Controller
         $profile->address =  $request->input('address');
         $profile->building =  $request->input('building');
        
-
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('images', 'public');
             $profile->image = $path;

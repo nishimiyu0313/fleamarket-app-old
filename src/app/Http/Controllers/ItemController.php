@@ -21,20 +21,22 @@ class ItemController extends Controller
         $userId = auth()->id();
 
         $items = Item::where('user_id', '!=', $userId)
-        ->orderBy('created_at', 'desc')->Paginate(8);
+            ->orderBy('created_at', 'desc')->Paginate(8);
         return view('item.index', compact('items'));
     }
-    public function mylist()
+
+     public function mylist()
     {
         /** @var \App\Models\User $user */
         $user = Auth::user();
         $favoriteItems = $user->likedItems()
+            ->where('items.user_id', '!=', $user->id)
             ->orderBy('likes.created_at', 'desc')
             ->paginate(8);
 
-
         return view('item.mylist', compact('favoriteItems', 'user'));
     }
+
     public function detail($id)
     {
         $user = auth()->user();
@@ -52,8 +54,10 @@ class ItemController extends Controller
             },
             'comments.user.profile'
         ])->withCount('comments', 'likedUsers')->findOrFail($id);
+
         return view('item.detail', compact('item', 'user', 'profile'));
     }
+
     public function like(Item $item)
     {
         $user = Auth::user();
@@ -96,16 +100,12 @@ class ItemController extends Controller
         $categories = Category::all();
         $conditions = Condition::all();
 
-        $items = Item::orderBy('created_at', 'desc')->get();
-
-        return view('item.sell', compact('conditions', 'categories', 'items'));
+        return view('item.sell', compact('conditions', 'categories'));
     }
-    public function sell(Request $request)
+
+    public function sell(ExhibitionRequest $request)
     {
         $imagePath = $request->image->store('images', 'public');
-        $conditions = Condition::all();
-        $categories = Category::all();
-
 
         $item = Item::create([
             'name' => $request->name,
@@ -122,7 +122,6 @@ class ItemController extends Controller
         return redirect('/');
     }
 
-
     public function  profileSell(Request $request)
     {
         $user = auth()->user();
@@ -130,14 +129,15 @@ class ItemController extends Controller
         $listedItems  = Item::where('user_id', $user->id)->latest()->paginate(8);
         return view('item.profilesell', compact('user', 'listedItems', 'profile'));
     }
+
     public function  profileBuy(Request $request)
     {
         $user = auth()->user();
         $profile = Profile::where('user_id', $user->id)->first();
         $purchasedItems = Payment::where('user_id', $user->id)
-            ->where('status', Payment::STATUS_COMPLETED) // 購入完了のみ
-            ->with('item') // itemとのリレーションが必要
-            ->latest() // created_at の降順
+            ->where('status', Payment::STATUS_COMPLETED) 
+            ->with('item') 
+            ->latest() 
             ->paginate(8);
 
         return view('item.profilebuy', compact('user', 'profile', 'purchasedItems'));
@@ -153,22 +153,23 @@ class ItemController extends Controller
         } elseif ($type === 'mylist') {
             $query = Item::whereHas('likedUsers', function ($q) {
                 $q->where('user_id', auth()->id());
-            });
+            })->orderBy('created_at', 'desc');
         } else {
             abort(404);
         }
-        if ($request->filled('keyword')) {
-            $query->where('name', 'like', '%' . $request->keyword . '%');
-        }
-        $favoriteItems = collect();
-
-        if ($type === 'mylist') {
-            // ユーザーのいいねアイテムを取得（$queryはすでに絞り込んでいるのでgetだけ）
-            $favoriteItems = $query->paginate(8)->appends($request->all());
+        if (!empty($keyword)) {
+            $query->where('name', 'like', '%' . $keyword . '%');
         }
 
+       
         $items = $query->paginate(8)->appends($request->all());
-        $view = $type === '/' ? 'item/index' : 'item.mylist';
+
+      
+        $favoriteItems = $type === 'mylist' ? $items : collect();
+
+       
+        $view = $type === '/' ? 'item.index' : 'item.mylist';
+       
         return view($view, compact('items', 'keyword', 'favoriteItems'));
     }
 }

@@ -17,14 +17,17 @@ class Item extends Model
         'description',
         'price',
         'image',
-        'is_sold'
+        'is_sold',
+    ];
+    protected $casts = [
+        'is_sold' => 'boolean',
     ];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
-    
+
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'category_item', 'item_id', 'category_id');

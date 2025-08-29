@@ -1,0 +1,59 @@
+<?php
+
+namespace Tests\Feature;
+
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
+use App\Models\User;
+use App\Models\Category;
+use App\Models\Item;
+
+
+class ItemsellTest extends TestCase
+{
+    use RefreshDatabase;
+
+    public function test_商品出品画面にて必要な情報が保存できること（カテゴリ、商品の状態、商品名、商品の説明、販売価格）()
+    {
+        /** @var \App\Models\User $user */
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
+
+        $category = Category::factory()->create();
+        // 送信するフォームデータ（カテゴリ、状態、名前、説明、価格）
+        $data = [
+            'name' => 'テスト商品',
+            'description' => 'これはテスト用の商品です',
+            'condition_id' => 2,
+            'price' => 1500,
+            'category_ids' => [$category->id],
+        ];
+        // 商品出品用のPOSTリクエストを送る（ルートは適宜変更してね）
+        $response = $this->post('/sell', $data);
+
+        // リダイレクトなど成功のレスポン/sellスを確認        // 多くは保存後リダイレクトされるので302期待
+        $response->assertRedirect('/');   // 例えば商品一覧ページにリダイレクトされる想定
+
+
+        // DBに保存されているかを確認
+        $this->assertDatabaseHas('items', [
+            'name' => 'テスト商品',
+            'description' => 'これはテスト用の商品です',
+            'category_id' => 1,
+            'condition_id' => 2,
+            'price' => 1500,
+        ]);
+        $item = Item::where('name', 'テスト商品')->first();
+
+        $this->assertDatabaseHas('category_item', [
+            'item_id' => $item->id,
+            'category_id' => $category->id,
+        ]);
+
+
+    }
+    }

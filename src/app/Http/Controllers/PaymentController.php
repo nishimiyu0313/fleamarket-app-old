@@ -8,6 +8,7 @@ use App\Models\Payment;
 use App\Models\Item;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class PaymentController extends Controller
 {
@@ -22,33 +23,39 @@ class PaymentController extends Controller
         }
        
         $profile = $user->profile;
-        $payments = Payment::select('content')->distinct()->get();
-        return view('payment.purchase', compact('item', 'user', 'payments', 'profile'));
+        
+        return view('payment.purchase', compact('item', 'user', 'profile'));
     }
     public function payment(PurchaseRequest $request, $item_id)
     {
+        
+       // Log::debug('payment() メソッド開始');
         $item = Item::find($item_id);
 
-        
-        if ($item && $item->sold) {
+        if (!$item) {
+            //Log::debug('商品が見つからない');
+            abort(404);
+        }
+
+        if ($item->is_sold) {
+            //Log::debug('既に購入済み');
             return redirect()->back()->withErrors(['msg' => 'この商品は既に購入済みです。']);
         }
-        $request->validate([
-            'content' => 'required|string',
-        ]);
 
         $user = Auth::user();
+       // Log::debug('ユーザーID: ' . (isset($user) && $user->id ? $user->id : 'null'));
+  
 
         $payment = Payment::where('user_id', $user->id)
             ->where('item_id', $item_id)
             ->first();
-
         
         if ($payment) {
             $payment->update([
                 'content' => $request->content,
                 'status' => Payment::STATUS_COMPLETED,
             ]);
+            //Log::debug('既存のPaymentを更新');
         } else {
            
             $profile = $user->profile;
@@ -63,12 +70,15 @@ class PaymentController extends Controller
                 'status'      => Payment::STATUS_COMPLETED,
             ]);
         }
-        $item = Item::find($item_id);
-        if ($item) {
-            $item->is_sold = true;
-            $item->save();
-        }
+       // Log::debug('item->is_sold変更前: ' . $item->is_sold);
+        $item->is_sold = true;
+        
+        $item->save();
+        //Log::debug('item->is_sold変更後: ' . $item->is_sold);
+        //$item->forceFill(['is_sold' => true])->save();
+
 
         return redirect('/');
     }
+    
 }

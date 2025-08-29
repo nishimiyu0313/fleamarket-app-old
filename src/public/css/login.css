@@ -84,3 +84,48 @@
   margin-top: 20px;
   text-align: center;
 }
+
+@media screen and (min-width: 768px) and (max-width: 850px) {
+  .header {
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+    padding: 10px 0;
+  }
+  
+    .header__heading {
+    font-size: 25px;
+    padding-left: 10px;
+    margin: 5px;
+  }
+    .form {
+    width: 90%;
+  }
+    .form__group-title {
+    margin-left: 0;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .form__input--text input,
+  .form__button-submit {
+    width: 100%;
+    max-width: 100%;
+  }
+  .form__input--text input {
+    font-size: 16px;
+  }
+  .form__button-submit {
+    font-size: 16px;
+  }
+  .form__error {
+    text-align: center;
+    font-size: 14px;
+  }
+  .login-form__content {
+    padding: 20px 10px;
+  }
+  .register__link {
+    font-size: 14px;
+  }
+}

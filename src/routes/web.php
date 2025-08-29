@@ -18,8 +18,11 @@ use App\Http\Controllers\PaymentController;
 |
 */
 
-Route::get('/', [ItemController::class, 'list']);
+Route::get('/', function () {
+    return view('welcome');
+});
 
+Route::get('/', [ItemController::class, 'list']);
 
 
 Route::middleware('auth')->group(function () {
@@ -39,12 +42,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/mypage/profile', [ProfileController::class, 'index']);
     Route::post('/mypage/profile', [ProfileController::class, 'store']);
-    Route::get(' /mypage/profile/{user_id}', [ProfileController::class, 'profile']);
-    Route::post(' /mypage/profile/{user_id}', [ProfileController::class, 'updateProfile']);
+    Route::get('/mypage/profile/{user_id}', [ProfileController::class, 'profile']);
+    Route::post('/mypage/profile/{user_id}', [ProfileController::class, 'updateProfile']);
 
     Route::get('/purchase/{item_id}', [PaymentController::class, 'index']);
     Route::post('/purchase/{item_id}', [PaymentController::class, 'payment']);
     Route::get('/purchase/address/{item_id}', [ProfileController::class, 'address']);
     Route::post('/purchase/address/{item_id}', [ProfileController::class, 'updateAddress']);
 });
+
 Route::get('/item/{item_id}', [ItemController::class, 'detail']);

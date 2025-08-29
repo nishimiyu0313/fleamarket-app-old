@@ -57,3 +57,54 @@
     color: #ff0000;
     text-align: left;
 }
+@media screen and (min-width: 768px) and (max-width: 850px) {
+    .address-form__content {
+    padding: 15px 10px;
+  }
+
+  .address-form__heading {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .form {
+    width: 90%;
+    text-align: center;
+  }
+
+  .form__group {
+    margin: 20px 0;
+  }
+
+  .form__group-title {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .form__label--item {
+    font-size: 18px;
+  }
+
+  .address {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form__input--text input {
+    width: 90%;
+    font-size: 16px;
+  }
+
+  .profile-form__btn {
+    width: 90%;
+    font-size: 18px;
+    height: 50px;
+    margin-top: 30px;
+  }
+
+  .form__error {
+    font-size: 13px;
+    text-align: center;
+  }
+}
