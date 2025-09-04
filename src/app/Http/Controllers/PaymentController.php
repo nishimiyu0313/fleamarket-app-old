@@ -28,6 +28,7 @@ class PaymentController extends Controller
     }
     public function payment(PurchaseRequest $request, $item_id)
     {
+        //dump('create0');
         
        // Log::debug('payment() メソッド開始');
         $item = Item::find($item_id);
@@ -49,7 +50,7 @@ class PaymentController extends Controller
         $payment = Payment::where('user_id', $user->id)
             ->where('item_id', $item_id)
             ->first();
-        
+        //dump('create1');
         if ($payment) {
             $payment->update([
                 'content' => $request->content,
@@ -59,7 +60,7 @@ class PaymentController extends Controller
         } else {
            
             $profile = $user->profile;
-
+//dump('create2');
             Payment::create([
                 'user_id'     => $user->id,
                 'item_id'     => $item_id,

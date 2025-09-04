@@ -28,9 +28,11 @@ class ItemsellTest extends TestCase
         $data = [
             'name' => 'テスト商品',
             'description' => 'これはテスト用の商品です',
-            'condition_id' => 2,
+            'image' => 'images/dummy.jpeg',        
             'price' => 1500,
-            'category_ids' => [$category->id],
+            'category' => [$category->id],
+            'condition' => 2,
+
         ];
         // 商品出品用のPOSTリクエストを送る（ルートは適宜変更してね）
         $response = $this->post('/sell', $data);
@@ -43,9 +45,9 @@ class ItemsellTest extends TestCase
         $this->assertDatabaseHas('items', [
             'name' => 'テスト商品',
             'description' => 'これはテスト用の商品です',
-            'category_id' => 1,
             'condition_id' => 2,
             'price' => 1500,
+            'image' => 'images/dummy.jpeg'
         ]);
         $item = Item::where('name', 'テスト商品')->first();
 
@@ -53,7 +55,5 @@ class ItemsellTest extends TestCase
             'item_id' => $item->id,
             'category_id' => $category->id,
         ]);
-
-
     }
     }

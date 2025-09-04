@@ -105,6 +105,7 @@ class ItemController extends Controller
 
     public function sell(ExhibitionRequest $request)
     {
+        dd('');
         $imagePath = $request->image->store('images', 'public');
 
         $item = Item::create([

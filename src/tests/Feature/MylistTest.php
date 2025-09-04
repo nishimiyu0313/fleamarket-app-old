@@ -15,7 +15,8 @@ class MylistTest extends TestCase
 
     public function test_いいねした商品だけが表示される()
     {
-        /** @var \App\Models\User $user */
+         /** @var \App\Models\User $user */
+       
 
         $user = User::factory()->create();
 

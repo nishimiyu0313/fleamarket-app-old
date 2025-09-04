@@ -106,6 +106,7 @@ class DetailTest extends TestCase
         $categories = Category::factory()->count(3)->create([
             // nameだけ自動でもOK
         ]);
+      
 
         // 複数カテゴリを紐づける
         $item->categories()->attach($categories->pluck('id'));
@@ -115,7 +116,8 @@ class DetailTest extends TestCase
 
         // 各カテゴリ名が表示されていることを確認
         foreach ($categories as $category) {
-            $response->assertSee($category->name);
+        
+            $response->assertSee($category->content);
         }
     }
     }
