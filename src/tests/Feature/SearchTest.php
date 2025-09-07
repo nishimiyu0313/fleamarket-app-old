@@ -49,7 +49,7 @@ class SearchTest extends TestCase
         $user->favorites()->attach($bag->id);
 
         // 検索キーワード「バッグ」で商品一覧にアクセス
-        $response = $this->actingAs($user)->get('/items?keyword=バッグ');
+        $response = $this->actingAs($user)->get('/?keyword=バッグ');
         $response->assertStatus(200);
         $response->assertSeeText('バッグ');
         $response->assertDontSeeText('革靴');

@@ -28,8 +28,8 @@ class ExhibitionRequest extends FormRequest
             'description' => ['required', 'max:255'],
             'image' => ['required', 'mimes:jpeg,jpg,png'],
             'price' =>['required','numeric','min:0'],
-            'category' => ['required'],
-            'condition' => ['required']
+            //'category' => ['required'],
+            //'condition' => ['required']
 
         ];
     }

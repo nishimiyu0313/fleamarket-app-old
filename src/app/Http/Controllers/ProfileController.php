@@ -8,7 +8,6 @@ use App\Http\Requests\AddressRequest;
 use App\Models\Profile;
 use App\Models\Payment;
 use App\Models\Item;
-use Faker\Provider\ar_EG\Address;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -77,14 +76,13 @@ class ProfileController extends Controller
     {
     $user = Auth::user();
 
-    // 入力された配送先をバリデーション
     $request->validate([
         'postal_code' => 'required|string',
         'address' => 'required|string',
         'building' => 'nullable|string',
     ]);
 
-    // 該当の Payment レコードがあれば更新、なければ作成（住所だけ一時保存）
+   
     $payment = Payment::firstOrNew([
         'user_id' => $user->id,
         'item_id' => $item_id,
@@ -96,7 +94,7 @@ class ProfileController extends Controller
     $payment->status = Payment::STATUS_ADDRESS_PENDING;
 
     if (is_null($payment->content)) {
-        $payment->content = '';  // content が null なら空文字で埋める
+        $payment->content = '';  
     }
 
     $payment->save();

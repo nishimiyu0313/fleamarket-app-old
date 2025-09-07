@@ -41,7 +41,7 @@
 
 @media screen and (min-width: 1400px) and (max-width: 1540px) {
  .products-row {
-        grid-template-columns: repeat(4, 1fr); /* PC用のカラム数 */
+        grid-template-columns: repeat(4, 1fr); 
     }
 }
 
@@ -50,7 +50,7 @@
 
 @media screen and (min-width: 768px) and (max-width: 850px) {
     .products-row {
-        grid-template-columns: repeat(2, 1fr); /* タブレットは2列が見やすい */
+        grid-template-columns: repeat(2, 1fr); 
     }
    
     

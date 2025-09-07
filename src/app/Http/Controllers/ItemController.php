@@ -105,8 +105,9 @@ class ItemController extends Controller
 
     public function sell(ExhibitionRequest $request)
     {
-        dd('');
+     
         $imagePath = $request->image->store('images', 'public');
+     
 
         $item = Item::create([
             'name' => $request->name,
@@ -117,9 +118,10 @@ class ItemController extends Controller
             'image' => $imagePath,
             'user_id' => Auth::id()
         ]);
+      
 
         $item->categories()->sync($request->category_ids ?? []);
-
+        
         return redirect('/');
     }
 

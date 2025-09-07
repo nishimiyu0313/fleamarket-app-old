@@ -41,6 +41,6 @@
 
 @media screen and (min-width: 768px) and (max-width: 850px) {
     .products-row {
-        grid-template-columns: repeat(2, 1fr); /* タブレットは2列が見やすい */
+        grid-template-columns: repeat(2, 1fr);
     }
 }
