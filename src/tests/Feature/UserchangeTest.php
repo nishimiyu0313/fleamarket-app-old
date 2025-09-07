@@ -32,10 +32,8 @@ class UserchangeTest extends TestCase
 
         $user->profile()->updateOrCreate([], $profileData);
 
-        // 2. 作成したユーザーでログイン状態にする
         $response = $this->actingAs($user)->get('/mypage/profile/{$item->id}');
 
-        // 3. 変更画面が正常に表示されているかを確認（ステータスコード200）
         $response->assertStatus(200);
 
         $response->assertSee('テストユーザー');

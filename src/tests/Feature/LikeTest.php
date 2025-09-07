@@ -46,10 +46,10 @@ class LikeTest extends TestCase
             'condition_id' => $condition->id,
         ]);
 
-        // いいね済みにする
+        
         $user->likedItems()->attach($item->id);
 
-        // 表示ページにアクセス（例：一覧 or 詳細ページ）
+
         $response = $this->actingAs($user)->get("/item/{$item->id}");
 
        

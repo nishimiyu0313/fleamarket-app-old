@@ -80,7 +80,7 @@ class MylistTest extends TestCase
         $ownItem = Item::factory()->create([
             'name' => '自分の商品',
             'condition_id' => $condition->id,
-            'user_id' => $user->id, // 出品者が自分
+            'user_id' => $user->id, 
         ]);
 
         $otherUser = User::factory()->create();

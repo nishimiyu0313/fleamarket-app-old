@@ -20,7 +20,7 @@ class AddressTest extends TestCase
         /** @var \App\Models\User $user */
         $user = User::factory()->create();
 
-        // プロフィール（住所情報）作成・更新
+        
         $profileData = [
             'name' => 'テストユーザー',
             'postal_code' => '123-4567',
@@ -30,17 +30,17 @@ class AddressTest extends TestCase
         ];
         $user->profile()->updateOrCreate([], $profileData);
 
-        // 商品（購入対象）作成
+       
         $condition = Condition::factory()->create();
         $item = Item::factory()->create(['condition_id' => $condition->id]);
 
-        // 購入画面にアクセス（ログインユーザーとして）
+        
         $response = $this->actingAs($user)->get("/purchase/{$item->id}");
 
-        // ステータス200で表示成功をチェック
+       
         $response->assertStatus(200);
 
-        // 住所が画面に含まれているかチェック
+       
         $response->assertSee($profileData['postal_code']);
         $response->assertSee($profileData['address']);
         $response->assertSee($profileData['building']);

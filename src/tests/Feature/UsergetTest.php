@@ -21,7 +21,6 @@ class UsergetTest extends TestCase
             'name' => 'テストユーザー',
         ]);
 
-        // プロフィール作成（画像含む）
         $user->profile()->create([
             'name' => 'テストユーザー',
             'postal_code' => '123-4567',
@@ -30,7 +29,6 @@ class UsergetTest extends TestCase
             'image' => 'profile.jpg',
         ]);
 
-        // 出品商品を2件作成
         $condition = Condition::factory()->create();
         $itemsForSale = Item::factory()->count(2)->create([
             'user_id' => $user->id,
@@ -38,7 +36,7 @@ class UsergetTest extends TestCase
             'name' => 'テスト商品名'
         ]);
 
-        // 別ユーザー作成＆購入商品を2件作成
+
         $seller = User::factory()->create();
         $itemsPurchased = Item::factory()->count(2)->create([
             'user_id' => $seller->id,
@@ -46,7 +44,7 @@ class UsergetTest extends TestCase
             'is_sold' => true,
         ]);
 
-        // 購入履歴作成
+      
         foreach ($itemsPurchased as $item) {
             Payment::factory()->create([
                 'user_id' => $user->id,
@@ -55,12 +53,12 @@ class UsergetTest extends TestCase
             ]);
         }
 
-        // 取得する画面へアクセス（例：ユーザープロフィールページ）
+
         $response = $this->actingAs($user)->get("/mypage/buy");
 
         $response->assertStatus(200);
 
-        // プロフィール画像、ユーザー名の確認
+
         $response->assertSee('profile.jpg');
         $response->assertSee('テストユーザー');
 
@@ -73,13 +71,9 @@ class UsergetTest extends TestCase
         $sellResponse->assertStatus(200);
         $sellResponse->assertSee('テストユーザー');
 
-        // 出品商品確認
+
         foreach ($itemsForSale as $item) {
             $sellResponse->assertSee($item->name);
-        }
-
-        
+        }   
     }
-
-   
 }

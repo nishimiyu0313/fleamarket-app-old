@@ -29,7 +29,7 @@ class CommentTest extends TestCase
 
         $response->assertStatus(302);
 
-        // DBにコメントが登録されているかチェック
+        
         $this->assertDatabaseHas('comments', [
             'user_id' => $user->id,
             'item_id' => $item->id,
@@ -67,21 +67,21 @@ class CommentTest extends TestCase
         $condition = Condition::factory()->create();
         $item = Item::factory()->create(['condition_id' => $condition->id]);
 
-        // contentが空のコメントデータ
+       
         $commentData = [
             'content' => '',
         ];
 
-        // ログインユーザーとしてPOST送信
+        
         $response = $this->actingAs($user)->post("/item/{$item->id}/comments", $commentData);
 
-        // バリデーションエラーでリダイレクト(通常は前ページに戻る)
+       
         $response->assertStatus(302);
 
-        // バリデーションエラーがセッションにあるか
+        
         $response->assertSessionHasErrors(['content']);
 
-        // DBに登録されていないことも確認
+       
         $this->assertDatabaseMissing('comments', [
             'user_id' => $user->id,
             'item_id' => $item->id,
@@ -97,7 +97,7 @@ class CommentTest extends TestCase
         $condition = Condition::factory()->create();
         $item = Item::factory()->create(['condition_id' => $condition->id]);
 
-        // 256文字のコメントを作成
+        
         $longComment = str_repeat('あ', 256);
 
         $commentData = [
