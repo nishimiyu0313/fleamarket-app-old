@@ -36,6 +36,49 @@ DBのテーブルにダミーデータを投入
 7 ストレージに保存したファイルを表示するためシンボリックリンクを作成
 php artisan storage:link
 ```
+## テストユーザ
+```
+ダミー商品は、ユーザ１がすべて出品しているので
+ユーザ２でログインすると出品商品が見れます
+
+ユーザ１
+name：山田太郎
+email：test@email
+password:coachtech
+
+ユーザ２
+name：山田次郎
+email：test2@email
+password:coachtech
+```
+
+## テスト環境構築
+```
+テスト用データベースの作成
+docker-compose exec mysql bash
+mysql -u root -p
+
+CREATE DATABASE demo_test;
+SHOW DATABASES;
+
+テスト用の.envファイルの作成
+cp .env .env.testing
+
+APP_ENV=test
+APP_KEY=
+DB_DATABASE=demo_test
+DB_USERNAME=root
+DB_PASSWORD=root
+
+テスト用のテーブルの作成
+docker-compose exec php bash
+php artisan key:generate --env=testing
+php artisan config:clear
+php artisan migrate --env=testing
+
+テストの実行
+php artisan test
+```
 ## 使用技術
 ```
 ・PHP8.0
