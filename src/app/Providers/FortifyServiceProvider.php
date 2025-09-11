@@ -59,7 +59,7 @@ class FortifyServiceProvider extends ServiceProvider
 
         $this->app->bind(\Laravel\Fortify\Http\Requests\LoginRequest::class, LoginRequest::class);
         Fortify::authenticateUsing(function (Request $request) {
-           
+
 
             $user = User::where('email', $request->email)->first();
 
@@ -78,6 +78,10 @@ class FortifyServiceProvider extends ServiceProvider
             $email = (string) $request->email;
 
             return Limit::perMinute(10)->by($email . $request->ip());
+        });
+        
+        Fortify::verifyEmailView(function () {
+            return view('auth.verify-email');
         });
     }
 }
