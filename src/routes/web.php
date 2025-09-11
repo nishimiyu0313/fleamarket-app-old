@@ -25,7 +25,7 @@ Route::get('/', function () {
 Route::get('/', [ItemController::class, 'list']);
 
 
-Route::middleware('auth')->group(function () {
+Route::group(['middleware' => ['auth', 'verified']],function () {
     Route::get('/mylist', [ItemController::class, 'mylist']);
     Route::get('/item/search', [ItemController::class, 'search']);
     Route::post('/item/{item}/like', [ItemController::class, 'like']);

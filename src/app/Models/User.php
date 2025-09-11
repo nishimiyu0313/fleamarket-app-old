@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -42,7 +42,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function likedItems() 
+    public function likedItems()
     {
         return $this->belongsToMany(Item::class, 'likes')->withTimestamps();
     }
@@ -60,5 +60,4 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
-        
-    }
+}

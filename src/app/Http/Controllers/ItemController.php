@@ -25,7 +25,7 @@ class ItemController extends Controller
         return view('item.index', compact('items'));
     }
 
-     public function mylist()
+    public function mylist()
     {
         /** @var \App\Models\User $user */
         $user = Auth::user();
@@ -105,9 +105,9 @@ class ItemController extends Controller
 
     public function sell(ExhibitionRequest $request)
     {
-     
+
         $imagePath = $request->image->store('images', 'public');
-     
+
 
         $item = Item::create([
             'name' => $request->name,
@@ -118,10 +118,10 @@ class ItemController extends Controller
             'image' => $imagePath,
             'user_id' => Auth::id()
         ]);
-      
+
 
         $item->categories()->sync($request->category_ids ?? []);
-        
+
         return redirect('/');
     }
 
@@ -138,9 +138,9 @@ class ItemController extends Controller
         $user = auth()->user();
         $profile = Profile::where('user_id', $user->id)->first();
         $purchasedItems = Payment::where('user_id', $user->id)
-            ->where('status', Payment::STATUS_COMPLETED) 
-            ->with('item') 
-            ->latest() 
+            ->where('status', Payment::STATUS_COMPLETED)
+            ->with('item')
+            ->latest()
             ->paginate(8);
 
         return view('item.profilebuy', compact('user', 'profile', 'purchasedItems'));
@@ -164,15 +164,15 @@ class ItemController extends Controller
             $query->where('name', 'like', '%' . $keyword . '%');
         }
 
-       
+
         $items = $query->paginate(8)->appends($request->all());
 
-      
+
         $favoriteItems = $type === 'mylist' ? $items : collect();
 
-       
+
         $view = $type === '/' ? 'item.index' : 'item.mylist';
-       
+
         return view($view, compact('items', 'keyword', 'favoriteItems'));
     }
 }
