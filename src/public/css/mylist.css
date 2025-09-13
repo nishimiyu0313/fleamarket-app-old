@@ -6,9 +6,8 @@
     display: flex;
     height: 47px;    
     top: 127px;
-    border-bottom: 1px solid #000; /* ←ここを追加 */
+    border-bottom: 1px solid #000; 
 } 
- /* ↓以下も追加 */
 .toppage-list h3 {
   margin: 0;
 }
