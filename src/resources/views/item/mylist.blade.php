@@ -7,7 +7,7 @@
 @section('content')
 <div class="mylist-content">
     <div class="toppage-list">
-        <a class="recommend" href="/">
+        <a class="recommend" href="/item/search?keyword={{request('keyword')}}">
             <h3>おすすめ</h3>
         </a>
         <div class="mylist">

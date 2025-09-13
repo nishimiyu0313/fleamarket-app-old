@@ -10,7 +10,7 @@
         <div class="recommend">
             <h3>おすすめ</h3>
         </div>
-        <a class="mylist" href="/mylist">
+        <a class="mylist" href="/item/search?keyword={{request('keyword')}}&type=mylist">
             <h3>マイリスト</h3>
         </a>
     </div>

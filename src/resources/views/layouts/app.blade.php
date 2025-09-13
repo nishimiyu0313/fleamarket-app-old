@@ -19,7 +19,7 @@
             <form class="search-form" action="/item/search" method="get">
                 @csrf
                 <input class="search-form__keyword-input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{request('keyword')}}">
-                <input type="hidden" name="type" value="{{ request()->is('mylist*') ? 'mylist' : '/' }}">
+                <input type="hidden" name="type" value="{{ request('type') == 'mylist' ? 'mylist' : '/' }}">
             </form>
             <ul class="header-nav">
                 <li class="header-nav__item">
