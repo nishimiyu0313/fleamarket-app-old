@@ -24,9 +24,9 @@
 }
 .form__group-title {
     text-align: left;
-  font-size: 20px;
-font-weight: bold;
-  font-size: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 .form__label--item {
@@ -47,13 +47,12 @@ font-weight: bold;
     margin-top: 60px;
 }
 .form__input--text input {
-     padding: 10px;
-  width: 680px;
-  height: 40px;
-  border: 1px solid #0c0000;
-  border-radius: 3px;
-  text-align: center;
-
+    padding: 10px;
+    width: 680px;
+    height: 40px;
+    border: 1px solid #0c0000;
+    border-radius: 3px;
+    text-align: left;
 }
 .file-input {
     display: none;
@@ -77,55 +76,53 @@ font-weight: bold;
     text-align: left;
 }
 
-
 @media screen and (min-width: 768px) and (max-width: 850px) {
     .profile-form__content {
-    padding: 15px 10px;
-  }
-  .profile-form__heading {
-    font-size: 20px;
-  }
-  .form {
-    width: 95%;
-  }
-   .form__group-title {
-    font-size: 16px;
-    margin-left: 80px;
-    text-align: left;
-
-  }
-   .form__label--item {
-    font-size: 18px;
-  }
-   .form__input--text input,
-  .profile-form__btn {
-    width: 80%;
-    max-width: 100%;
-  }
-  .form__input--text input {
-    font-size: 16px;
-  }
-  .profile-form__btn {
-    font-size: 18px;
-    height: 45px;
-    margin-top: 30px;
-  }
-  .file-button {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-  .profile-image {
-    flex-direction: column;
-    align-items: center;
-  }
+        padding: 15px 10px;
+    }
+    .profile-form__heading {
+        font-size: 20px;
+    }
+    .form {
+        width: 95%;
+    }
+    .form__group-title {
+        font-size: 16px;
+        margin-left: 80px;
+        text-align: left;
+    }
+    .form__label--item {
+        font-size: 18px;
+    }
+    .form__input--text input,
+    .profile-form__btn {
+        width: 80%;
+        max-width: 100%;
+    }
+    .form__input--text input {
+        font-size: 16px;
+    }
+    .profile-form__btn {
+        font-size: 18px;
+        height: 45px;
+        margin-top: 30px;
+    }
+    .file-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+    .profile-image {
+        flex-direction: column;
+        align-items: center;
+    }
     .profile-icon {
-    width: 60px;
-    height: 60px;
-    margin-right: 15px;
-  }
+        width: 60px;
+        height: 60px;
+        margin-right: 15px;
+    }
 
-  .form__error {
-    font-size: 13px;
-    text-align: center;
-  }
+    .form__error {
+        font-size: 13px;
+        text-align: center;
+    }
 }

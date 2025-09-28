@@ -57,7 +57,7 @@
     color: #ff0000;
     text-align: left;
 }
-@media screen and (min-width: 768px) and (max-width: 850px) {
+@media screen and (max-width: 850px) {
     .address-form__content {
     padding: 15px 10px;
   }

@@ -14,7 +14,7 @@
     <div class="app">
         <header class="header">
             <a class="header__heading" href="/">
-                <img src="{{ asset('images/logo.pmg1.svg') }}" alt="COACHTECHロゴ" height="35">
+                <img src="{{ asset('images/logo.pmg1.svg') }}" alt="COACHTECHロゴ">
             </a>
             <form class="search-form" action="/item/search" method="get">
                 @csrf

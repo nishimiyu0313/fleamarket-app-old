@@ -15,6 +15,10 @@
     padding-left: 15px;
 }
 
+.header__heading img {
+    width: 300px;
+}
+
 
 
 .admin__target-btn {
@@ -27,14 +31,11 @@
 }
 
 .search-form__keyword-input {
-    padding: 20px;
-    width: 350px;
-    height: 7px;   
+    width: 100%;
+    height: 45px;   
     border-radius: 5px;
     margin-top: 15px;
     font-size:23px
-
-
 }
 
 .header-nav__item {
@@ -64,7 +65,7 @@
     margin-right: 10px;
 }
 
-@media screen and (min-width: 768px) and (max-width: 850px) {
+@media screen and (max-width: 850px) {
     .header {
     flex-direction: column; 
     align-items: center;

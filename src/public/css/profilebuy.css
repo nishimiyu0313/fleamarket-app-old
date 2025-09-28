@@ -65,7 +65,7 @@
     margin-left: 1100px;
 }
 
-@media screen and (min-width: 768px) and (max-width: 850px) {
+@media screen and (max-width: 850px) {
     .products-row {
         grid-template-columns: repeat(2, 1fr);
     }
