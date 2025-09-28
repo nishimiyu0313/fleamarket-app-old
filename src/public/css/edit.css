@@ -60,6 +60,7 @@
 .profile-image {
     display: flex;
     align-items: center;
+    border: 1px solid #f84e4e;
 }
 .profile-icon {
     width: 80px;

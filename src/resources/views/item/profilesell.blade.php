@@ -24,8 +24,8 @@
             <h3>出品した商品</h3>
         </div>
         <a class="boughtitem full-width-underline" href="/mypage/buy">
-           
-                <h3>購入した商品</h3>
+
+            <h3>購入した商品</h3>
         </a>
 
     </div>

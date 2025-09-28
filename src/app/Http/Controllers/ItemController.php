@@ -7,6 +7,7 @@ use App\Http\Requests\ExhibitionRequest;
 use App\Http\Requests\CommentRequest;
 use App\Models\Item;
 use App\Models\Profile;
+use App\Models\User;
 use App\Models\Comment;
 use App\Models\Condition;
 use App\Models\Category;
@@ -128,8 +129,9 @@ class ItemController extends Controller
     public function  profileSell(Request $request)
     {
         $user = auth()->user();
-        $profile = Profile::where('user_id', $user->id)->first();
+        $profile = User::where('id', $user->id)->first();
         $listedItems  = Item::where('user_id', $user->id)->latest()->paginate(8);
+        //dd($user->id);
         return view('item.profilesell', compact('user', 'listedItems', 'profile'));
     }
 

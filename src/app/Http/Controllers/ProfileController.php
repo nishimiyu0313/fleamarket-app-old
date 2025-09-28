@@ -62,6 +62,7 @@ class ProfileController extends Controller
         }
         
         $profile->save();
+       // dd('profile');
         
         return redirect('/mypage/sell');
     }

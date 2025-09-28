@@ -33,14 +33,14 @@
                 </div>
                 <div class="category-list">
                     @foreach ($categories as $category)
-                    <input type="checkbox" name="category_ids[]" value=" {{ $category->id }}" id="category_{{ $category->id }}" required>
+                    <input type="checkbox" name="category_ids[]" value=" {{ $category->id }}" id="category_{{ $category->id }}" required {{ in_array($category->id, old('category_ids', [])) ? 'checked' : '' }}>
                     <label class="category-option" for="category_{{ $category->id }}">
-                        {{ $category->content }}
+                        {{ $category->content }}{{ old('category') }}
                     </label>
                     @endforeach
                 </div>
                 <div class="register-form__error-message">
-                    @error('category')
+                    @error('category_ids')
                     {{ $message }}
                     @enderror
                 </div>
@@ -53,12 +53,14 @@
                     <select class="contact-form__select" name="condition_id" id="condition" required>
                         <option disabled selected>選択してください</option>
                         @foreach($conditions as $condition)
-                        <option value="{{ $condition->id }}">{{ $condition->content }}</option>
+                        <option value="{{ $condition->id }}" {{ old('condition_id') == $condition->id ? 'selected' : '' }}>
+                            {{ $condition->content }}
+                        </option>
                         @endforeach
                     </select>
                 </div>
                 <div class="register-form__error-message">
-                    @error('condition')
+                    @error('condition_id')
                     {{ $message }}
                     @enderror
                 </div>
@@ -97,7 +99,7 @@
                 </div>
                 <div class="sell-form__name-inputs">
                     <textarea class="sell-form__input contact-form__name-input" type="textarea" name="description" id="description"
-                        value="{{ old('description') }}"></textarea>
+                        value="{{ old('description') }}">{{ old('description') }}</textarea>
                 </div>
                 <div class="register-form__error-message">
                     @error('description')
