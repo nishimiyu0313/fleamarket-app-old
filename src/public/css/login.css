@@ -9,6 +9,10 @@
     max-width: 1550px;
 }
 
+.header img {
+    width: 300px;
+}
+
 .header__heading {
     color: #fff;
     text-decoration: none;
@@ -49,6 +53,8 @@
   height: 20px;
   color: #ff0000;
   text-align: left;
+  padding-left: 0; 
+  margin-left: 0;
 }
 
 .form__input--text input {

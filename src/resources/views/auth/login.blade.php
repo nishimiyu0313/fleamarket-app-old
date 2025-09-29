@@ -12,10 +12,10 @@
 <body>
     <div class="app">
         <header class="header">
-            <h1 class="header__heading">coachtech</h1>
+            <img src="{{ asset('images/logo.pmg1.svg') }}" alt="COACHTECHロゴ">
         </header>
         <main>
-           
+
             <div class="login-form__content">
                 <div class="login-form__heading">
                     <h2>ログイン</h2>
