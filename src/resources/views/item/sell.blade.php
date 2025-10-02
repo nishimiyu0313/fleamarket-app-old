@@ -18,10 +18,9 @@
             </div>
             <label for="image" class="file-button">画像を選択する</label>
             <input type="file" id="image" name="image" class="file-input" required>
-            <img src=" {{ asset('img/default.jpg') }}"
-                alt="アイコン画像" class="profile-icon" id="preview">
+            <img src="" id="preview" class="sell-form__img">
 
-            
+
             <script src="{{ asset('js/image-preview.js') }}"></script>
             <div class="register-form__error-message">
                 @error('image')

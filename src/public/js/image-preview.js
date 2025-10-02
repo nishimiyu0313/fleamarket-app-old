@@ -8,6 +8,7 @@ function previewImage(input) {
     fileReader.onload = function () {
         // imgタグのsrc属性にデータURLを設定し、プレビューとして表示
         imgElement.src = fileReader.result;
+        imgElement.style.display = "block";
     };
 
     // 選択されたファイルをデータURLとして読み込み開始

@@ -38,6 +38,11 @@
 
     appearance: none;
 }
+
+.sell-form__img {
+  display : 'none';
+  width : 200px;
+}
 .file-button {
     padding: 10px 20px;
     background-color: white;
