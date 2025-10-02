@@ -5,14 +5,13 @@
     font-size: 20px;
     display: flex;
     height: 47px;
-    width: 1512px;
+    
     top: 127px;
 }
 .profile__info {
-    display: flex;
-    align-items: center;
-    margin-left: 500px;
     margin-top: 60px;
+    display: flex;
+    justify-content: center;
 }
 .profile-icon {
     width: 150px;
@@ -51,6 +50,11 @@
     height: auto;
     object-fit: cover;
 }
+
+.profile__btn {
+    display: flex;
+    justify-content: flex-end;
+}
 .profile-form__btn {
     width: 200px;
     height: 40px;
@@ -62,7 +66,7 @@
     cursor: pointer;
     font-size: 15px;
     font-weight: 600;
-    margin-left: 1100px;
+    
 }
 
 @media screen and (max-width: 850px) {

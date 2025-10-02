@@ -13,16 +13,17 @@
         <form class="form" action="/mypage/profile" method="post" enctype="multipart/form-data" novalidate>
             @csrf
             <div class="profile__image">
-                <img src=" {{ isset($profile['image']) ? asset('storage/' . $profile['image']) : asset('/img/default.jpg') }}" alt="アイコン画像"
-                    class="profile-icon">
-
+                <img src=" {{ isset($profile['image']) ? 
+asset('storage/' . $profile['image']) : asset('img/default.jpg') }}"
+                    alt="アイコン画像" class="profile-icon" id="preview">
                 <label for="image" class="file-button">画像を選択する</label>
                 <input type="file" id="image" name="image" class="file-input">
+                <script src="{{ asset('js/image-preview.js') }}"></script>
+
                 <div class="form__error">
                     @error('image')
                     {{ $message }}
                     @enderror
-
                 </div>
 
 

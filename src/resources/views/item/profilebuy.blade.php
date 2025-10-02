@@ -12,36 +12,37 @@
         <p class="profile-name">{{ $profile->name }}</p>
 
     </div>
-
-    <form class="profile-form" action="/mypage/profile/{{ auth()->user()->id }}" method="get" novalidate>
-        @csrf
-        <input class="profile-form__btn" type="submit" value="プロフィールを編集">
-    </form>
-    <div class="toppage-list">
-        <a class="listeditem" href="/mypage/sell">
-            <h3>出品した商品</h3>
-        </a>
-        <div class="boughtitem">
-            <h3>購入した商品</h3>
-        </div>
+    <div class="profile__btn">
+        <form class="profile-form" action="/mypage/profile/{{ auth()->user()->id }}" method="get" novalidate>
+            @csrf
+            <input class="profile-form__btn" type="submit" value="プロフィールを編集">
+        </form>
     </div>
-    <div class="products-form">
-        <div class="products-row">
-            @foreach ($purchasedItems as $payment)
-            @if ($payment->item)
-            <div class="products-card">
-                <a href="/item/{{ $payment->item->id }}">
-                    <img src="{{ '/storage/' . $payment->item->image }}" alt=" 商品画像" class="products-image">
-                </a>
-                <div class="item-name">{{ $payment->item->name }}</div>
-
+        <div class="toppage-list">
+            <a class="listeditem" href="/mypage/sell">
+                <h3>出品した商品</h3>
+            </a>
+            <div class="boughtitem">
+                <h3>購入した商品</h3>
             </div>
-            @endif
-            @endforeach
         </div>
-        <div class="pagination">
-            {{ $purchasedItems->links('vendor.pagination.semantic-ui') }}
+        <div class="products-form">
+            <div class="products-row">
+                @foreach ($purchasedItems as $payment)
+                @if ($payment->item)
+                <div class="products-card">
+                    <a href="/item/{{ $payment->item->id }}">
+                        <img src="{{ '/storage/' . $payment->item->image }}" alt=" 商品画像" class="products-image">
+                    </a>
+                    <div class="item-name">{{ $payment->item->name }}</div>
+
+                </div>
+                @endif
+                @endforeach
+            </div>
+            <div class="pagination">
+                {{ $purchasedItems->links('vendor.pagination.semantic-ui') }}
+            </div>
         </div>
     </div>
-</div>
-@endsection
+    @endsection
